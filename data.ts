@@ -167,6 +167,30 @@ export const INFO_ITEMS: InformationItem[] = [
       "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=800"
     ]
   }
+  {
+    "id": "1768143287323",
+    "categoryId": "education",
+    "name": "আমিনপুর আয়েন উদ্দিন উচ্চ বিদ্যালয়",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/2/25/%E0%A6%86%E0%A6%AE%E0%A6%BF%E0%A6%A8%E0%A6%AA%E0%A7%81%E0%A6%B0_%E0%A6%86%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%A8_%E0%A6%89%E0%A6%A6%E0%A7%8D%E0%A6%A6%E0%A6%BF%E0%A6%A8_%E0%A6%89%E0%A6%9A%E0%A7%8D%E0%A6%9A_%E0%A6%AC%E0%A6%BF%E0%A6%A6%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B2%E0%A6%AF%E0%A6%BC_-_%E0%A6%AE%E0%A7%80%E0%A6%B0_%E0%A6%B0%E0%A6%BE%E0%A6%AC%E0%A7%8D%E0%A6%AC%E0%A6%BF_%E0%A6%B9%E0%A7%8B%E0%A6%B8%E0%A7%87%E0%A6%A8.jpg",
+    "description": "",
+    "location": "আমিনপুর বাজারের পশ্চিম পাশে",
+    "phone": "+৮৮০১৭৪৫৫৫৫৫৫৫",
+    "infoSections": [],
+    "staff": [
+      {
+        "id": "1768143393177",
+        "name": "তারেক রহমান",
+        "designation": "প্রধান শিক্ষক",
+        "image": "https://www.aljazeera.com/wp-content/uploads/2024/01/349B2U6-highres-1704353492.jpg",
+        "joiningDate": "১২-১২-২০২৫",
+        "educationalQualification": "পিএইচডি",
+        "phone": "+৮৮০১৭৫৫৬৬৭৭৮৮৮৮",
+        "facebook": "facebook.com/rabbi.aminpur"
+      }
+    ],
+    "establishmentYear": "১৯৬৭",
+    "subCategoryId": "high-school"
+  }
 export const ARTICLES: Article[] = [];
 export const INFO_ITEMS: InformationItem[] = [
   {
