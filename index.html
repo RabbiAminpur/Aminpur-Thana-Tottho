@@ -10,7 +10,7 @@
     <style>
         body {
             font-family: 'Tiro Bangla', serif;
-            background-color: #fcfcfc;
+            background-color: #f8fafc;
             color: #1e293b;
             -webkit-tap-highlight-color: transparent;
             overflow-x: hidden;
@@ -26,28 +26,38 @@
             transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
         }
 
-        /* Vibrant Floating Animation for background blobs */
+        /* Vibrant Floating Mesh Animation */
         @keyframes float-vibrant {
             0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-            33% { transform: translate(50px, -80px) scale(1.2) rotate(10deg); }
-            66% { transform: translate(-40px, 40px) scale(0.8) rotate(-10deg); }
-            100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            33% { transform: translate(30px, -50px) scale(1.1) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) scale(0.9) rotate(240deg); }
+            100% { transform: translate(0, 0) scale(1) rotate(360deg); }
         }
         .animate-blob-vibrant {
-            animation: float-vibrant 25s infinite alternate ease-in-out;
+            animation: float-vibrant 20s infinite linear;
+            filter: blur(80px);
+            opacity: 0.6;
         }
-        .animation-delay-3000 {
-            animation-delay: 3s;
-        }
-        .animation-delay-6000 {
-            animation-delay: 6s;
-        }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
         
         .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 1rem;
+        }
+        @media (min-width: 640px) {
+            .category-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+                gap: 1.5rem;
+            }
         }
     </style>
 <script type="importmap">
