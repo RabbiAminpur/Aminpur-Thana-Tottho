@@ -32,11 +32,23 @@ export interface Doctor {
   chamber?: string;
 }
 
+export interface TableRow {
+  label: string;
+  value: string;
+}
+
+export interface DynamicTable {
+  id: string;
+  title: string;
+  rows: TableRow[];
+}
+
 export interface InformationItem {
   id: string;
   categoryId: CategoryId;
   name: string;
   image: string;
+  gallery?: string[];
   description: string;
   location: string;
   phone: string;
@@ -46,6 +58,7 @@ export interface InformationItem {
   doctors?: Doctor[];
   chairman?: string;
   fullDetails?: string;
+  tables?: DynamicTable[];
 }
 
 export interface Article {
