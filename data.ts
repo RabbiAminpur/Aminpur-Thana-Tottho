@@ -70,84 +70,187 @@ export const CATEGORIES: Category[] = [
 ];
 
 export const INFO_ITEMS: InformationItem[] = [
+  // --- COLLEGES ---
   {
-    id: 'edu-1',
+    id: 'edu-col-1',
     categoryId: CategoryId.EDUCATION,
     subCategoryId: 'college',
     name: 'জাতপুর কলেজ',
-    image: 'https://images.unsplash.com/photo-1541339907198-e08756ebafe3?q=80&w=800',
-    description: 'অত্র অঞ্চলের অন্যতম প্রধান উচ্চ শিক্ষা প্রতিষ্ঠান। এটি শিক্ষার মান উন্নয়নে অগ্রণী ভূমিকা পালন করছে।',
-    location: 'জাতপুর, আমিনপুর, পাবনা।',
-    phone: '০১৭০০-০০০০০১',
+    image: 'https://images.unsplash.com/photo-1523050853051-f7539076b01b?q=80&w=800',
+    description: 'জাতপুর কলেজ আমিনপুর থানার একটি ঐতিহ্যবাহী শিক্ষা প্রতিষ্ঠান। এটি অত্র অঞ্চলের উচ্চশিক্ষা প্রসারে গুরুত্বপূর্ণ ভূমিকা পালন করে আসছে। এখানে মানবিক, বিজ্ঞান ও ব্যবসায় শিক্ষা শাখায় পাঠদান করা হয়।',
+    location: 'জাতপুর বাজার, আমিনপুর, পাবনা।',
+    phone: '০১৭২২-০০০০০০',
     establishmentYear: '১৯৬৭',
     infoSections: [],
     staff: [
       {
-        id: 'teacher-1',
-        name: 'ড. মো. আসাদুল হক',
+        id: 'st-col-1',
+        name: 'মো. আসাদুল হক',
         designation: 'অধ্যক্ষ',
-        image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400',
-        educationalQualification: 'পিএইচডি (বাংলা), ঢাকা বিশ্ববিদ্যালয়',
-        experience: '২৫ বছরের শিক্ষকতা ও প্রশাসনিক অভিজ্ঞতা',
-        phone: '০১৭০০-১১২২৩৩',
-        address: 'আমিনপুর বাজার, পাবনা',
-        facebook: 'https://facebook.com',
-        bio: 'শিক্ষার প্রসারে নিবেদিতপ্রাণ একজন ব্যক্তিত্ব।'
+        image: 'https://images.unsplash.com/photo-1544168190-79c17527004f?q=80&w=400',
+        educationalQualification: 'এম.এ (বাংলা), রাজশাহী বিশ্ববিদ্যালয়',
+        experience: '১৮ বছরের শিক্ষকতা ও প্রশাসনিক অভিজ্ঞতা।',
+        phone: '০১৭২২-১১২২৩৩',
+        address: 'আমিনপুর, পাবনা।',
+        joiningDate: '০১/০১/২০১০'
       }
     ]
   },
   {
-    id: 'hosp-1',
-    categoryId: CategoryId.HOSPITAL,
-    name: 'আমিনপুর আধুনিক হাসপাতাল',
-    image: 'https://images.unsplash.com/photo-1587350859728-1176946e8b0d?q=80&w=800',
-    description: 'আধুনিক চিকিৎসা সেবা সম্বলিত একটি নির্ভরযোগ্য বেসরকারি হাসপাতাল।',
-    location: 'আমিনপুর চৌরাস্তা, পাবনা।',
-    phone: '০১৭০০-৯৯৮৮৭৭',
-    establishmentYear: '২০০৫',
+    id: 'edu-col-2',
+    categoryId: CategoryId.EDUCATION,
+    subCategoryId: 'college',
+    name: 'আমিনপুর ডিগ্রী কলেজ',
+    image: 'https://images.unsplash.com/photo-1541339907198-e08756ebafe3?q=80&w=800',
+    description: 'আমিনপুর ডিগ্রী কলেজ অত্র এলাকার অন্যতম আধুনিক ও মানসম্মত শিক্ষা প্রতিষ্ঠান। মনোরম পরিবেশে দক্ষ শিক্ষক মণ্ডলীর তত্ত্বাবধানে এখানে পাঠদান করা হয়।',
+    location: 'আমিনপুর বাজার, পাবনা।',
+    phone: '০১৭৩৩-০০০০০০',
+    establishmentYear: '১৯৯৪',
     infoSections: [],
     staff: [
       {
-        id: 'doc-1',
-        name: 'ডা. সিফাতুল্লাহ মাহমুদ',
-        designation: 'এমবিবিএস, এফসিপিএস (মেডিসিন)',
-        image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=400',
-        educationalQualification: 'এমবিবিএস (রাজশাহী মেডিকেল), এফসিপিএস',
-        experience: '১২ বছরের চিকিৎসা সেবা প্রদানের অভিজ্ঞতা',
-        phone: '০১৭০০-৮৮৭৭৬৬',
-        address: 'পাবনা সদর, পাবনা'
+        id: 'st-col-2',
+        name: 'ড. মো. মতিউর রহমান',
+        designation: 'ভারপ্রাপ্ত অধ্যক্ষ',
+        image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400',
+        educationalQualification: 'পিএইচডি (অর্থনীতি), ঢাকা বিশ্ববিদ্যালয়',
+        experience: '১৫ বছরের শিক্ষকতা জীবন।',
+        phone: '০১৭৩৩-৪৪৫৫৬৬',
+        address: 'বেড়া, পাবনা।',
+        joiningDate: '১০/০৫/২০১২'
+      }
+    ]
+  },
+
+  // --- HIGH SCHOOLS ---
+  {
+    id: 'edu-hs-1',
+    categoryId: CategoryId.EDUCATION,
+    subCategoryId: 'high-school',
+    name: 'জাতপুর উচ্চ বিদ্যালয়',
+    image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800',
+    description: 'আমিনপুর থানার প্রাচীনতম ও স্বনামধন্য মাধ্যমিক বিদ্যালয়গুলোর মধ্যে জাতপুর উচ্চ বিদ্যালয় অন্যতম। খেলাধুলা এবং সাংস্কৃতিক কর্মকাণ্ডেও এই বিদ্যালয়ের বিশেষ খ্যাতি রয়েছে।',
+    location: 'জাতপুর, আমিনপুর, পাবনা।',
+    phone: '০১৭৪৪-০০০০০০',
+    establishmentYear: '১৯৪৪',
+    infoSections: [],
+    staff: [
+      {
+        id: 'st-hs-1',
+        name: 'মোঃ আব্দুল মান্নান',
+        designation: 'প্রধান শিক্ষক',
+        image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400',
+        educationalQualification: 'বি.এসসি (গণিত), বি.এড',
+        experience: '২২ বছরের শিক্ষকতা জীবন।',
+        phone: '০১৭৪৪-১১২২৩৩',
+        address: 'আমিনপুর, পাবনা।',
+        joiningDate: '১৫/০৩/২০০৫'
       }
     ]
   },
   {
-    id: 'union-1',
-    categoryId: CategoryId.UNION,
-    subCategoryId: 'jatpur',
-    name: 'জাতপুর ইউনিয়ন পরিষদ কার্যালয়',
-    image: 'https://images.unsplash.com/photo-1590060153074-303de9911bd7?q=80&w=800',
-    description: 'আমিনপুর থানার ১নং ইউনিয়ন পরিষদ। এটি একটি অত্যন্ত গুরুত্বপূর্ণ প্রশাসনিক এলাকা। যমুনা নদীর কোল ঘেঁষে গড়ে ওঠা এই ইউনিয়নের অধিকাংশ মানুষ কৃষি এবং ব্যবসার সাথে জড়িত।',
-    location: 'জাতপুর বাজার, আমিনপুর, পাবনা।',
-    phone: '০১৭০০-১১১২২২',
-    establishmentYear: '১৯৬৩',
-    infoSections: [
-      {
-        id: 'sec1',
-        title: 'প্রশাসনিক তথ্য',
-        fields: [
-          { label: 'সচিব', value: 'মোঃ রফিকুল ইসলাম' },
-          { label: 'গ্রাম সংখ্যা', value: '১৪টি' }
-        ]
-      }
-    ],
+    id: 'edu-hs-2',
+    categoryId: CategoryId.EDUCATION,
+    subCategoryId: 'high-school',
+    name: 'মাশুমদিয়া উচ্চ বিদ্যালয়',
+    image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=800',
+    description: 'যমুনা নদীর তীরে অবস্থিত মাশুমদিয়া উচ্চ বিদ্যালয়টি অত্র অঞ্চলের শিক্ষার আলো ছড়িয়ে দিচ্ছে। জেএসসি ও এসএসসি পরীক্ষায় নিয়মিত ভালো ফলাফলের জন্য এটি সুপরিচিত।',
+    location: 'মাশুমদিয়া, আমিনপুর, পাবনা।',
+    phone: '০১৭৫৫-০০০০০০',
+    establishmentYear: '১৯৫৮',
+    infoSections: [],
     staff: [
       {
-        id: 'st1',
-        name: 'মোঃ নজরুল ইসলাম',
-        designation: 'চেয়ারম্যান',
-        image: 'https://images.unsplash.com/photo-1544168190-79c17527004f?q=80&w=400',
-        phone: '০১৭০০-১১১২২২',
-        facebook: 'https://facebook.com',
-        bio: 'জনপ্রতিনিধি হিসেবে গত ১০ বছর ধরে দায়িত্বরত আছেন।'
+        id: 'st-hs-2',
+        name: 'মোঃ হাফিজুর রহমান',
+        designation: 'প্রধান শিক্ষক',
+        image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=400',
+        educationalQualification: 'এম.এ (ইংরেজি), বি.এড',
+        experience: '২০ বছরের শিক্ষকতা জীবন।',
+        phone: '০১৭৫৫-৭৭৮৮৯৯',
+        address: 'মাশুমদিয়া, পাবনা।',
+        joiningDate: '২০/০৯/২০০৮'
+      }
+    ]
+  },
+
+  // --- MADRASAS ---
+  {
+    id: 'edu-mad-1',
+    categoryId: CategoryId.EDUCATION,
+    subCategoryId: 'madrasa',
+    name: 'জাতপুর সিনিয়র মাদ্রাসা',
+    image: 'https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?q=80&w=800',
+    description: 'ইসলামী শিক্ষা ও আধুনিক শিক্ষার সমন্বয়ে জাতপুর সিনিয়র মাদ্রাসাটি পরিচালিত হয়ে আসছে। এখানে আলিম পর্যায় পর্যন্ত পাঠদান করা হয়।',
+    location: 'জাতপুর, আমিনপুর, পাবনা।',
+    phone: '০১৭৬৬-০০০০০০',
+    establishmentYear: '১৯৫২',
+    infoSections: [],
+    staff: [
+      {
+        id: 'st-mad-1',
+        name: 'মাওলানা মোঃ ইসমাইল হোসেন',
+        designation: 'অধ্যক্ষ',
+        image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400',
+        educationalQualification: 'কামিল (হাদিস), ফাজিল (ডিগ্রী)',
+        experience: '২৫ বছরের শিক্ষকতা ও ধর্মীয় গবেষণা।',
+        phone: '০১৭৬৬-৩৩৪৪৫৫',
+        address: 'আমিনপুর বাজার, পাবনা।',
+        joiningDate: '০১/০১/১৯৯৮'
+      }
+    ]
+  },
+
+  // --- PRIMARY SCHOOLS ---
+  {
+    id: 'edu-pri-1',
+    categoryId: CategoryId.EDUCATION,
+    subCategoryId: 'primary',
+    name: 'আমিনপুর সরকারি প্রাথমিক বিদ্যালয়',
+    image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800',
+    description: 'অত্র অঞ্চলের শিশুদের প্রাথমিক শিক্ষা নিশ্চিত করতে এই বিদ্যালয়টি নিরলসভাবে কাজ করে যাচ্ছে। এটি সরকারের প্রাথমিক শিক্ষা অধিদপ্তরের অধীনে পরিচালিত।',
+    location: 'আমিনপুর বাজার সংলগ্ন, পাবনা।',
+    phone: '০১৭৭৭-০০০০০০',
+    establishmentYear: '১৯৭২',
+    infoSections: [],
+    staff: [
+      {
+        id: 'st-pri-1',
+        name: 'মিসেস সুলতানা পারভীন',
+        designation: 'প্রধান শিক্ষক',
+        image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400',
+        educationalQualification: 'বি.এ, সি-ইন-এড',
+        experience: '১৫ বছরের শিক্ষকতা জীবন।',
+        phone: '০১৭৭৭-৯৯০০১১',
+        address: 'পাবনা সদর।',
+        joiningDate: '১০/০৬/২০১৫'
+      }
+    ]
+  },
+
+  // --- KINDERGARTENS ---
+  {
+    id: 'edu-kg-1',
+    categoryId: CategoryId.EDUCATION,
+    subCategoryId: 'kindergarten',
+    name: 'লিটল জুয়েলস কিন্ডারগার্টেন',
+    image: 'https://images.unsplash.com/photo-1595113316349-9fa4eb24f884?q=80&w=800',
+    description: 'শিশুদের খেলাধুলা ও আনন্দের মাধ্যমে মানসম্মত আধুনিক শিক্ষা প্রদানের লক্ষ্যে লিটল জুয়েলস কিন্ডারগার্টেন প্রতিষ্ঠিত। এখানে শিশুদের সৃজনশীল বিকাশে বিশেষ জোর দেওয়া হয়।',
+    location: 'আমিনপুর চৌরাস্তা, পাবনা।',
+    phone: '০১৭৮৮-০০০০০০',
+    establishmentYear: '২০১০',
+    infoSections: [],
+    staff: [
+      {
+        id: 'st-kg-1',
+        name: 'মো. তরিকুল ইসলাম',
+        designation: 'পরিচালক',
+        image: 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?q=80&w=400',
+        educationalQualification: 'এম.বি.এ (মার্কেটিং)',
+        experience: '১২ বছরের শিক্ষা ব্যবস্থাপনা অভিজ্ঞতা।',
+        phone: '০১৭৮৮-৫৫৬৬৭৭',
+        address: 'আমিনপুর, পাবনা।',
+        joiningDate: '০১/০১/২০১০'
       }
     ]
   }
