@@ -41,31 +41,31 @@ const DynamicIcon = ({ name, className }: { name: string, className?: string }) 
   );
 };
 
-// Exit Confirmation Modal
+// Exit Confirmation Modal Component
 const ExitModal: React.FC<{ isOpen: boolean; onClose: () => void; onConfirm: () => void }> = ({ isOpen, onClose, onConfirm }) => {
   if (!isOpen) return null;
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black bg-opacity-60 backdrop-blur-sm">
-      <div className="bg-white rounded-2xl w-full max-sm overflow-hidden shadow-2xl animate-fadeIn">
-        <div className="p-6 text-center">
-          <div className="w-16 h-16 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
-            <LogOut size={32} />
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
+      <div className="bg-white rounded-[2.5rem] w-full max-w-sm overflow-hidden shadow-2xl border border-white/20">
+        <div className="p-8 text-center">
+          <div className="w-20 h-20 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
+            <LogOut size={40} />
           </div>
-          <h3 className="text-xl font-bold text-gray-800 mb-2">বের হতে চান?</h3>
-          <p className="text-gray-500">আপনি কি অ্যাপ থেকে প্রস্থান করতে নিশ্চিত?</p>
+          <h3 className="text-2xl font-bold text-gray-800 mb-3">বের হতে চান?</h3>
+          <p className="text-gray-500 leading-relaxed">আপনি কি নিশ্চিত যে আপনি আমিনপুর থানা অ্যাপ থেকে প্রস্থান করতে চান?</p>
         </div>
-        <div className="flex border-t">
+        <div className="flex border-t border-gray-100">
           <button 
             onClick={onClose}
-            className="flex-1 px-4 py-4 text-gray-600 font-bold hover:bg-gray-50 transition-colors border-r"
+            className="flex-1 px-4 py-5 text-gray-600 font-bold hover:bg-gray-50 active:bg-gray-100 transition-colors border-r border-gray-100"
           >
-            না
+            না, ফিরে যাই
           </button>
           <button 
             onClick={onConfirm}
-            className="flex-1 px-4 py-4 text-red-600 font-bold hover:bg-red-50 transition-colors"
+            className="flex-1 px-4 py-5 text-red-600 font-bold hover:bg-red-50 active:bg-red-100 transition-colors"
           >
-            হ্যাঁ
+            হ্যাঁ, বের হবো
           </button>
         </div>
       </div>
@@ -76,14 +76,39 @@ const ExitModal: React.FC<{ isOpen: boolean; onClose: () => void; onConfirm: () 
 // Layout Component
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [showExitModal, setShowExitModal] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     setIsSidebarOpen(false);
   }, [location]);
 
+  // Handle hardware back button logic for Home page
+  useEffect(() => {
+    if (location.pathname === '/') {
+      const handlePopState = (e: PopStateEvent) => {
+        e.preventDefault();
+        window.history.pushState(null, '', window.location.href);
+        setShowExitModal(true);
+      };
+      window.history.pushState(null, '', window.location.href);
+      window.addEventListener('popstate', handlePopState);
+      return () => window.removeEventListener('popstate', handlePopState);
+    }
+  }, [location]);
+
+  const handleConfirmExit = () => {
+    window.location.href = "about:blank";
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
+      <ExitModal 
+        isOpen={showExitModal} 
+        onClose={() => setShowExitModal(false)} 
+        onConfirm={handleConfirmExit} 
+      />
+
       <header className="bg-emerald-600 text-white shadow-md fixed top-0 w-full z-50 px-4 py-3 flex justify-between items-center h-16">
         <Link to="/" className="text-xl font-bold flex items-center gap-2">
           <div className="bg-white p-1.5 rounded-xl shadow-inner">
@@ -147,6 +172,19 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <div className="p-2 bg-orange-100 text-orange-600 rounded-lg"><User size={20} /></div>
             <span>ডেভেলপার প্রোফাইল</span>
           </Link>
+
+          <div className="mt-8 pt-4 border-t">
+            <button 
+              onClick={() => {
+                setIsSidebarOpen(false);
+                setShowExitModal(true);
+              }}
+              className="w-full flex items-center gap-3 p-3.5 hover:bg-red-50 rounded-xl text-red-600 font-bold transition-all"
+            >
+              <div className="p-2 bg-red-100 text-red-600 rounded-lg"><LogOut size={20} /></div>
+              <span>প্রস্থান করুন</span>
+            </button>
+          </div>
         </nav>
       </aside>
 
@@ -164,21 +202,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
 const Dashboard: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [showExitModal, setShowExitModal] = useState(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const handlePopState = (e: PopStateEvent) => {
-      e.preventDefault();
-      window.history.pushState(null, '', window.location.href);
-      setShowExitModal(true);
-    };
-    window.history.pushState(null, '', window.location.href);
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
-
-  const handleConfirmExit = () => { window.location.href = "about:blank"; };
 
   const isSearching = searchTerm.trim() !== '';
 
@@ -201,8 +225,6 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="space-y-8 animate-fadeIn">
-      <ExitModal isOpen={showExitModal} onClose={() => setShowExitModal(false)} onConfirm={handleConfirmExit} />
-      
       {/* Search Section */}
       <section className="bg-gradient-to-br from-emerald-600 to-teal-700 rounded-3xl p-7 text-white shadow-xl text-center">
         <h1 className="text-3xl font-extrabold mb-1">স্বাগতম!</h1>
@@ -278,7 +300,7 @@ const Dashboard: React.FC = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {ARTICLES.map((article) => (
-              <Link key={article.id} to={`/article/${article.id}`} className="bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 flex flex-col group hover:shadow-xl transition-all duration-300">
+              <Link key={article.id} to={`/article/${article.id}`} className="bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 flex flex-col group hover:shadow-xl transition-all duration-300" >
                 <div className="h-44 overflow-hidden">
                   <img src={article.image} alt={article.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 </div>
