@@ -26,32 +26,20 @@ export interface StaffProfile {
   bio?: string;
 }
 
-export interface TableRow {
-  label: string;
-  value: string;
-}
-
-export interface DynamicTable {
-  id: string;
-  title: string;
-  rows: TableRow[];
-}
-
 export interface InformationItem {
   id: string;
   categoryId: CategoryId;
   name: string;
   image: string;
-  gallery: string[];
   description: string;
   location: string;
   phone: string;
   estYear?: string;
   eiin?: string;
-  staff: StaffProfile[];
   chairman?: string;
   fullDetails?: string;
-  tables: DynamicTable[];
+  gallery?: string[];
+  staff?: StaffProfile[];
 }
 
 export interface Article {

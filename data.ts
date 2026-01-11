@@ -20,7 +20,6 @@ export const CATEGORIES: Category[] = [
 ];
 
 export const INFO_ITEMS: InformationItem[] = [
-  // Union Parishads
   {
     id: 'union-1',
     categoryId: CategoryId.UNION,
@@ -30,111 +29,12 @@ export const INFO_ITEMS: InformationItem[] = [
     location: 'জাতপুর বাজার, আমিনপুর, পাবনা।',
     phone: '০১৭০০-১১১২২২',
     chairman: 'মোঃ নজরুল ইসলাম',
-    fullDetails: 'জাতপুর ইউনিয়ন আমিনপুর থানার একটি অত্যন্ত গুরুত্বপূর্ণ ইউনিয়ন। যমুনা নদীর কোল ঘেঁষে গড়ে ওঠা এই ইউনিয়নের অধিকাংশ মানুষ কৃষি এবং ব্যবসার সাথে জড়িত। এখানকার শিক্ষা হার অত্যন্ত সন্তোষজনক।',
-    gallery: [],
-    staff: [],
-    tables: []
+    fullDetails: 'জাতপুর ইউনিয়ন আমিনপুর থানার একটি অত্যন্ত গুরুত্বপূর্ণ ইউনিয়ন। যমুনা নদীর কোল ঘেঁষে গড়ে ওঠা এই ইউনিয়নের অধিকাংশ মানুষ কৃষি এবং ব্যবসার সাথে জড়িত।',
+    gallery: [
+      'https://images.unsplash.com/photo-1590060153074-303de9911bd7?q=80&w=800',
+      'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=800'
+    ]
   },
-  {
-    id: 'union-2',
-    categoryId: CategoryId.UNION,
-    name: 'মাসুন্দিয়া ইউনিয়ন পরিষদ',
-    image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=800&auto=format&fit=crop',
-    description: 'আমিনপুর থানার ২নং ইউনিয়ন পরিষদ। কৃষি ও অর্থনীতিতে সমৃদ্ধ এলাকা।',
-    location: 'মাসুন্দিয়া বাজার, আমিনপুর, পাবনা।',
-    phone: '০১৭০০-৩৩৩৪৪৪',
-    chairman: 'মোঃ মাইন উদ্দিন',
-    fullDetails: 'মাসুন্দিয়া ইউনিয়ন তার উর্বর কৃষি জমির জন্য পরিচিত। এখানকার উৎপাদিত ফসল অত্র অঞ্চলের চাহিদা মিটিয়ে বাইরেও সরবরাহ করা হয়। ইউনিয়নে বেশ কিছু সরকারি প্রাথমিক ও উচ্চ বিদ্যালয় রয়েছে।',
-    gallery: [],
-    staff: [],
-    tables: []
-  },
-  {
-    id: 'union-3',
-    categoryId: CategoryId.UNION,
-    name: 'পুরানভারেঙ্গা ইউনিয়ন পরিষদ',
-    image: 'https://images.unsplash.com/photo-1493916665398-143bcbc8e162?q=80&w=800&auto=format&fit=crop',
-    description: 'আমিনপুর থানার ৩নং ইউনিয়ন পরিষদ। ঐতিহ্যে ঘেরা একটি ইউনিয়ন।',
-    location: 'পুরানভারেঙ্গা, আমিনপুর, পাবনা।',
-    phone: '০১৭০০-৫৫৫৬৬৬',
-    chairman: 'মোঃ রফিকুল ইসলাম',
-    fullDetails: 'পুরানভারেঙ্গা ইউনিয়ন তার ঐতিহাসিক নিদর্শনের জন্য বিখ্যাত। এখানকার মানুষ অত্যন্ত সহজ-সরল এবং অতিথিপরায়ণ। ইউনিয়নের অবকাঠামো দিন দিন উন্নত হচ্ছে।',
-    gallery: [],
-    staff: [],
-    tables: []
-  },
-  {
-    id: 'union-4',
-    categoryId: CategoryId.UNION,
-    name: 'রূপপুর ইউনিয়ন পরিষদ',
-    image: 'https://images.unsplash.com/photo-1510519133417-2ad7c30ee743?q=80&w=800&auto=format&fit=crop',
-    description: 'আমিনপুর থানার ৪নং ইউনিয়ন পরিষদ। দেশের অন্যতম গুরুত্বপূর্ণ এলাকা।',
-    location: 'রূপপুর মোড়, আমিনপুর, পাবনা।',
-    phone: '০১৭০০-৭৭৭৮৮৮',
-    chairman: 'মোঃ শাহ আলম',
-    fullDetails: 'রূপপুর ইউনিয়ন বর্তমানে বাংলাদেশের অর্থনীতির একটি কেন্দ্রবিন্দু। পারমাণবিক বিদ্যুৎ কেন্দ্রের নিকটবর্তী হওয়ায় এর গুরুত্ব বহুগুণ বেড়ে গেছে। এখানকার যোগাযোগ ব্যবস্থা অত্যন্ত উন্নত।',
-    gallery: [],
-    staff: [],
-    tables: []
-  },
-  {
-    id: 'union-5',
-    categoryId: CategoryId.UNION,
-    name: 'সাগরকান্দি ইউনিয়ন পরিষদ',
-    image: 'https://images.unsplash.com/photo-1508817628294-5a453fa0b8fb?q=80&w=800&auto=format&fit=crop',
-    description: 'আমিনপুর থানার ৫নং ইউনিয়ন পরিষদ। লোকজ সংস্কৃতির চারণভূমি।',
-    location: 'সাগরকান্দি বাজার, আমিনপুর, পাবনা।',
-    phone: '০১৭০০-৯৯৯০০০',
-    chairman: 'মোঃ আব্দুল মান্নান',
-    fullDetails: 'সাগরকান্দি ইউনিয়ন তার সমৃদ্ধ সংস্কৃতির জন্য পরিচিত। এখানকার হাট-বাজার এবং ধান-পাটের ব্যবসা অত্র অঞ্চলের অর্থনীতির মূল চালিকাশক্তি। এখানে একটি বড় সরকারি গুদাম অবস্থিত।',
-    gallery: [],
-    staff: [],
-    tables: []
-  },
-  {
-    id: 'union-6',
-    categoryId: CategoryId.UNION,
-    name: 'আহমেদপুর ইউনিয়ন পরিষদ',
-    image: 'https://images.unsplash.com/photo-1572248521340-96466043bc20?q=80&w=800&auto=format&fit=crop',
-    description: 'আমিনপুর থানার ৬নং ইউনিয়ন পরিষদ। বর্ধিষ্ণু ও উন্নত ইউনিয়ন।',
-    location: 'আহমেদপুর, আমিনপুর, পাবনা।',
-    phone: '০১৭০০-১১১০০০',
-    chairman: 'মোঃ জাকির হোসেন',
-    fullDetails: 'আহমেদপুর ইউনিয়ন রাজনৈতিক এবং সামাজিকভাবে অত্যন্ত সচেতন একটি এলাকা। এখানকার রাস্তাঘাট উন্নত এবং গ্রামীণ অর্থনীতি অত্যন্ত স্থিতিশীল। এখানে একটি আদর্শ গ্রাম প্রকল্প চালু রয়েছে।',
-    gallery: [],
-    staff: [],
-    tables: []
-  },
-  {
-    id: 'union-7',
-    categoryId: CategoryId.UNION,
-    name: 'রানীনগর ইউনিয়ন পরিষদ',
-    image: 'https://images.unsplash.com/photo-1444858291040-58f756a3bcd6?q=80&w=800&auto=format&fit=crop',
-    description: 'আমিনপুর থানার ৭নং ইউনিয়ন পরিষদ। মৎস্য সম্পডে ভরপুর এলাকা।',
-    location: 'রানীনগর বাজার, আমিনপুর, পাবনা।',
-    phone: '০১৭০০-২২২০০০',
-    chairman: 'মোঃ খোরশেদ আলম',
-    fullDetails: 'রানীনগর ইউনিয়নটি যমুনা নদীর কোল ঘেঁষে অবস্থিত। এখানকার নদী এবং খালের মৎস্য সম্পদ অত্র এলাকার মানুষের আমিষের চাহিদা পূরণ করে। এখানকার মানুষের মাঝে ভ্রাতৃত্ববোধ প্রবল।',
-    gallery: [],
-    staff: [],
-    tables: []
-  },
-  {
-    id: 'union-8',
-    categoryId: CategoryId.UNION,
-    name: 'ঢালারচর ইউনিয়ন পরিষদ',
-    image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800&auto=format&fit=crop',
-    description: 'আমিনপুর থানার ৮নং ইউনিয়ন পরিষদ। বিশাল চর এলাকা সম্বলিত ইউনিয়ন।',
-    location: 'ঢালারচর বাজার, আমিনপুর, পাবনা।',
-    phone: '০১৭০০-৩৩৩০০০',
-    chairman: 'মোঃ কোরবান আলী',
-    fullDetails: 'ঢালারচর ইউনিয়নটি মূলত চর এলাকা নিয়ে গঠিত। যমুনা নদীর মাঝখানে বিশাল এই চরের উর্বর পলি মাটিতে বাদাম এবং গমের ব্যাপক ফলন হয়। এটি আমিনপুর থানার আয়তনে অন্যতম বড় ইউনিয়ন।',
-    gallery: [],
-    staff: [],
-    tables: []
-  },
-
-  // Existing institutions
   {
     id: 'edu-1',
     categoryId: CategoryId.EDUCATION,
@@ -145,14 +45,29 @@ export const INFO_ITEMS: InformationItem[] = [
     phone: '০১৭০০-০০০০০০',
     estYear: '১৯৬৫',
     eiin: '১১০০০০',
-    fullDetails: 'আমিনপুর উচ্চ বিদ্যালয় অত্র অঞ্চলের একটি অন্যতম সেরা বিদ্যাপীঠ। প্রতি বছর এখান থেকে অসংখ্য শিক্ষার্থী কৃতিত্বের সাথে উত্তীর্ণ হয়। বিদ্যালয়ে শিক্ষার মান অত্যন্ত উন্নত।',
-    // Fix: Add gallery and tables, rename teachers to staff and add id
-    gallery: [],
-    staff: [
-      { id: 'edu-1-t1', name: 'মোঃ আব্দুল লতিফ', designation: 'প্রধান শিক্ষক', image: 'https://i.pravatar.cc/150?u=teacher1' },
-      { id: 'edu-1-t2', name: 'মোছাঃ ফাতেমা খাতুন', designation: 'সহকারী শিক্ষক', image: 'https://i.pravatar.cc/150?u=teacher2' }
+    fullDetails: 'আমিনপুর উচ্চ বিদ্যালয় অত্র অঞ্চলের একটি অন্যতম সেরা বিদ্যাপীঠ। প্রতি বছর এখান থেকে অসংখ্য শিক্ষার্থী কৃতিত্বের সাথে উত্তীর্ণ হয়।',
+    gallery: [
+      'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=800',
+      'https://images.unsplash.com/photo-1523050335456-adaba834597d?q=80&w=800',
+      'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800'
     ],
-    tables: []
+    staff: [
+      {
+        id: 'st-1',
+        name: 'মোঃ আব্দুল লতিফ',
+        designation: 'প্রধান শিক্ষক',
+        image: 'https://images.unsplash.com/photo-1544168190-79c17527004f?q=80&w=400',
+        phone: '০১৭০০-১২২২৩৩',
+        bio: 'গত ২০ বছর ধরে শিক্ষার প্রসারে কাজ করছেন।'
+      },
+      {
+        id: 'st-2',
+        name: 'মোছাঃ ফাতেমা খাতুন',
+        designation: 'সহকারী প্রধান শিক্ষক',
+        image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400',
+        bio: 'গণিত বিভাগের সিনিয়র শিক্ষক।'
+      }
+    ]
   },
   {
     id: 'hosp-1',
@@ -162,28 +77,21 @@ export const INFO_ITEMS: InformationItem[] = [
     description: 'আধুনিক চিকিৎসা সেবা সম্বলিত বেসরকারী হাসপাতাল।',
     location: 'থানা মোড়, আমিনপুর।',
     phone: '০১৭০০-১১১২২২',
-    fullDetails: '২৪ ঘণ্টা জরুরী বিভাগ, প্যাথলজি ও অপারেশন থিয়েটার সুবিধা সম্পন্ন একটি আধুনিক হাসপাতাল। এখানে বিশেষজ্ঞ ডাক্তারগণ নিয়মিত রোগী দেখেন।',
-    // Fix: Add gallery and tables, rename doctors to staff and map specialty to designation
-    gallery: [],
-    staff: [
-      { id: 'hosp-1-d1', name: 'ডাঃ মোস্তাফিজুর রহমান', designation: 'মেডিসিন বিশেষজ্ঞ', image: 'https://i.pravatar.cc/150?u=dr1', phone: '০১৭০০-১২৩৪৫৬' },
-      { id: 'hosp-1-d2', name: 'ডাঃ তানিয়া আহমেদ', designation: 'গাইনী বিশেষজ্ঞ', image: 'https://i.pravatar.cc/150?u=dr2', phone: '০১৭০০-৬৫৪৩২১' }
+    fullDetails: '২৪ ঘণ্টা জরুরী বিভাগ, প্যাথলজি ও অপারেশন থিয়েটার সুবিধা সম্পন্ন একটি আধুনিক হাসপাতাল।',
+    gallery: [
+      'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=800',
+      'https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=800'
     ],
-    tables: []
-  },
-  {
-    id: 'pol-1',
-    categoryId: CategoryId.POLICE,
-    name: 'আমিনপুর থানা ভবন',
-    image: 'https://images.unsplash.com/photo-1593115057323-bc1ac9ad269c?q=80&w=800&auto=format&fit=crop',
-    description: 'জনগণের জান-মালের নিরাপত্তায় নিয়োজিত।',
-    location: 'আমিনপুর, পাবনা।',
-    phone: '০১৩২০-১২৩৪৫৬',
-    fullDetails: 'আমিনপুর থানা পাবনা জেলার একটি গুরুত্বপূর্ণ থানা। আইন শৃঙ্খলা পরিস্থিতি নিয়ন্ত্রণে এই থানার ভূমিকা অপরিসীম।',
-    // Fix: Add gallery, staff, and tables
-    gallery: [],
-    staff: [],
-    tables: []
+    staff: [
+      {
+        id: 'st-h1',
+        name: 'ডাঃ মোস্তাফিজুর রহমান',
+        designation: 'মেডিসিন বিশেষজ্ঞ',
+        image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=400',
+        phone: '০১৭০০-৪৫৪৫৫৫',
+        bio: 'মেডিসিন বিভাগে ১০ বছরের অভিজ্ঞতা।'
+      }
+    ]
   }
 ];
 
@@ -195,24 +103,24 @@ export const ARTICLES: Article[] = [
     date: '১০ মে ২০২৪',
     excerpt: 'আমিনপুর থানায় নতুন ভারপ্রাপ্ত কর্মকর্তা (ওসি) হিসেবে দায়িত্ব গ্রহণ করেছেন...',
     author: 'নিজস্ব প্রতিবেদক',
-    content: 'আমিনপুর থানায় নতুন ভারপ্রাপ্ত কর্মকর্তা (ওসি) হিসেবে দায়িত্ব গ্রহণ করেছেন। তিনি এলাকার শান্তি-শৃঙ্খলা বজায় রাখতে সকলের সহযোগিতা কামনা করেছেন। তিনি মাদক ও সন্ত্রাসের বিরুদ্ধে জিরো টলারেন্স ঘোষণা করেছেন।'
+    content: 'আমিনপুর থানায় নতুন ভারপ্রাপ্ত কর্মকর্তা (ওসি) হিসেবে দায়িত্ব গ্রহণ করেছেন। তিনি এলাকার শান্তি-শৃঙ্খলা বজায় রাখতে সকলের সহযোগিতা কামনা করেছেন।'
   },
   {
     id: 'art-2',
-    title: 'করোনা সচেতনতায় আমিনপুর স্কুলগুলোর উদ্যোগ',
-    image: 'https://images.unsplash.com/photo-1584483766114-2cea6facdf57?q=80&w=800&auto=format&fit=crop',
-    date: '০৮ মে ২০২৪',
-    excerpt: 'শিক্ষার্থীদের স্বাস্থ্য সচেতন করতে মাস্ক বিতরণ ও সচেতনতামূলক সভা অনুষ্ঠিত হয়েছে...',
-    author: 'মীর রাব্বি হোসেন',
-    content: 'আমিনপুর থানার বিভিন্ন শিক্ষা প্রতিষ্ঠানে শিক্ষার্থীদের স্বাস্থ্য সচেতন করতে মাস্ক বিতরণ ও সচেতনতামূলক সভা অনুষ্ঠিত হয়েছে। স্থানীয় প্রশাসনের সহায়তায় এই কর্মসূচি পালিত হয়।'
+    title: 'জাতপুর বাজারে অগ্নিকাণ্ড, ব্যাপক ক্ষয়ক্ষতি',
+    image: 'https://images.unsplash.com/photo-1542353436-312f0ee5930b?q=80&w=800',
+    date: '১২ মে ২০২৪',
+    excerpt: 'জাতপুর বাজারে ভয়াবহ অগ্নিকাণ্ডে অন্তত ৫টি দোকান ভস্মীভূত হয়েছে...',
+    author: 'স্টাফ রিপোর্টার',
+    content: 'গতরাত ২টায় জাতপুর বাজারে ভয়াবহ অগ্নিকাণ্ডের ঘটনা ঘটেছে। ফায়ার সার্ভিসের ২ টি ইউনিট ৩ ঘণ্টার চেষ্টায় আগুন নিয়ন্ত্রণে আনে।'
   },
   {
     id: 'art-3',
-    title: 'বোরো ধান কাটার উৎসবে আমিনপুর',
-    image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=800&auto=format&fit=crop',
-    date: '০৫ মে ২০২৪',
-    excerpt: 'মাঠে মাঠে এখন ধান কাটার ধুম পড়েছে, কৃষকের মুখে হাসির ঝিলিক...',
-    author: 'নিজস্ব প্রতিবেদক',
-    content: 'আমিনপুর থানার বিশাল এলাকা জুড়ে এখন বোরো ধান কাটার উৎসব চলছে। এবার ফলন ভালো হওয়ায় কৃষকরা অত্যন্ত খুশি। মাঠের পর মাঠ সোনালী ধানে ভরে উঠেছে।'
+    title: 'আমিনপুর স্কুলে বার্ষিক ক্রীড়া প্রতিযোগিতা সম্পন্ন',
+    image: 'https://images.unsplash.com/photo-1502639532281-80f18390ca7b?q=80&w=800',
+    date: '১৪ মে ২০২৪',
+    excerpt: 'আমিনপুর উচ্চ বিদ্যালয়ে আনন্দঘন পরিবেশে বার্ষিক ক্রীড়া প্রতিযোগিতা অনুষ্ঠিত হয়েছে...',
+    author: 'মীর রাব্বি হোসেন',
+    content: 'আমিনপুর উচ্চ বিদ্যালয়ের খেলার মাঠে বার্ষিক ক্রীড়া প্রতিযোগিতা ও পুরস্কার বিতরণী অনুষ্ঠান সম্পন্ন হয়েছে।'
   }
 ];
