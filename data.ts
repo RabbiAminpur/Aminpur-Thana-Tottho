@@ -1,4 +1,3 @@
-
 // data.ts - Fixes property mismatches and missing fields in InformationItem and Article
 import { CategoryId, Category, InformationItem, Article } from './types';
 
@@ -29,8 +28,13 @@ export const INFO_ITEMS: InformationItem[] = [
     description: 'আমিনপুর থানার ১নং ইউনিয়ন পরিষদ। এটি একটি ঐতিহ্যবাহী প্রশাসনিক এলাকা। জাতপুর ইউনিয়ন আমিনপুর থানার একটি অত্যন্ত গুরুত্বপূর্ণ ইউনিয়ন। যমুনা নদীর কোল ঘেঁষে গড়ে ওঠা এই ইউনিয়নের অধিকাংশ মানুষ কৃষি এবং ব্যবসার সাথে জড়িত।',
     location: 'জাতপুর বাজার, আমিনপুর, পাবনা।',
     phone: '০১৭০০-১১১২২২',
-    customFields: [
-      { label: 'চেয়ারম্যান', value: 'মোঃ নজরুল ইসলাম' }
+    // Fix: Wrapped custom fields into the correct infoSections structure
+    infoSections: [
+      {
+        id: 'sec-union-1',
+        title: 'প্রশাসনিক তথ্য',
+        fields: [{ label: 'চেয়ারম্যান', value: 'মোঃ নজরুল ইসলাম' }]
+      }
     ],
     gallery: [
       'https://images.unsplash.com/photo-1590060153074-303de9911bd7?q=80&w=800',
@@ -45,9 +49,16 @@ export const INFO_ITEMS: InformationItem[] = [
     description: 'আমিনপুর থানার একটি ঐতিহ্যবাহী শিক্ষা প্রতিষ্ঠান। আমিনপুর উচ্চ বিদ্যালয় অত্র অঞ্চলের একটি অন্যতম সেরা বিদ্যাপীঠ। প্রতি বছর এখান থেকে অসংখ্য শিক্ষার্থী কৃতিত্বের সাথে উত্তীর্ণ হয়।',
     location: 'আমিনপুর বাজার সংলগ্ন, পাবনা।',
     phone: '০১৭০০-০০০০০০',
-    customFields: [
-      { label: 'স্থাপিত', value: '১৯৬৫' },
-      { label: 'EIIN', value: '১১০০০০' }
+    // Fix: Wrapped custom fields into the correct infoSections structure
+    infoSections: [
+      {
+        id: 'sec-edu-1',
+        title: 'প্রতিষ্ঠান তথ্য',
+        fields: [
+          { label: 'স্থাপিত', value: '১৯৬৫' },
+          { label: 'EIIN', value: '১১০০০০' }
+        ]
+      }
     ],
     gallery: [
       'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=800',

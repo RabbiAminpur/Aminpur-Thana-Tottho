@@ -23,6 +23,9 @@ export interface StaffProfile {
   designation: string;
   image: string;
   phone?: string;
+  email?: string;
+  facebook?: string;
+  website?: string;
   bio?: string;
 }
 
@@ -31,15 +34,21 @@ export interface CustomField {
   value: string;
 }
 
+export interface InfoSection {
+  id: string;
+  title: string;
+  fields: CustomField[];
+}
+
 export interface InformationItem {
   id: string;
   categoryId: CategoryId;
   name: string;
-  image: string; // Main display image
+  image: string;
   description: string;
   location: string;
   phone: string;
-  customFields?: CustomField[];
+  infoSections?: InfoSection[]; // Multiple "Tables" or "Grids" of information
   gallery?: string[];
   staff?: StaffProfile[];
 }
@@ -47,7 +56,7 @@ export interface InformationItem {
 export interface Article {
   id: string;
   title: string;
-  images: string[]; // Support multiple images
+  images: string[];
   date: string;
   time?: string;
   excerpt: string;
