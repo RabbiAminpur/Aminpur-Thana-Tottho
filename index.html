@@ -4,29 +4,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>আমিনপুর থানা</title>
+    <title>আমিনপুর থানা বাতায়ন</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Tiro Bangla', serif;
-            background-color: #f8fafc;
+            background-color: #fcfcfc;
+            color: #1e293b;
             -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
         }
         .animate-fadeIn {
-            animation: fadeIn 0.4s ease-out;
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
+        .sidebar-transition {
+            transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
         }
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+
+        /* Vibrant Floating Animation for background blobs */
+        @keyframes float-vibrant {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            33% { transform: translate(50px, -80px) scale(1.2) rotate(10deg); }
+            66% { transform: translate(-40px, 40px) scale(0.8) rotate(-10deg); }
+            100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+        }
+        .animate-blob-vibrant {
+            animation: float-vibrant 25s infinite alternate ease-in-out;
+        }
+        .animation-delay-3000 {
+            animation-delay: 3s;
+        }
+        .animation-delay-6000 {
+            animation-delay: 6s;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
         }
     </style>
 <script type="importmap">

@@ -26,18 +26,20 @@ export interface StaffProfile {
   bio?: string;
 }
 
+export interface CustomField {
+  label: string;
+  value: string;
+}
+
 export interface InformationItem {
   id: string;
   categoryId: CategoryId;
   name: string;
-  image: string;
+  image: string; // Main display image
   description: string;
   location: string;
   phone: string;
-  estYear?: string;
-  eiin?: string;
-  chairman?: string;
-  fullDetails?: string;
+  customFields?: CustomField[];
   gallery?: string[];
   staff?: StaffProfile[];
 }
@@ -45,8 +47,9 @@ export interface InformationItem {
 export interface Article {
   id: string;
   title: string;
-  image: string;
+  images: string[]; // Support multiple images
   date: string;
+  time?: string;
   excerpt: string;
   content: string;
   author: string;
