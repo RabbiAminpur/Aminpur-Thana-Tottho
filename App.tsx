@@ -7,10 +7,10 @@ import {
   LayoutDashboard, GraduationCap, Hospital, Stethoscope, 
   Shield, Building, Briefcase, Camera, Share2, Mic, 
   Flame, ShoppingCart, PlusCircle, Building2, Package,
-  Info, User, Mail, Smartphone, ArrowRight
+  Info, User, Mail, Smartphone, ArrowRight, Lock, Globe, Heart
 } from 'lucide-react';
 import { CATEGORIES as INITIAL_CATEGORIES, INFO_ITEMS as INITIAL_INFO_ITEMS, ARTICLES as INITIAL_ARTICLES } from './data';
-import { CategoryId, InformationItem, Article, Category, StaffProfile } from './types';
+import { CategoryId, InformationItem, Article, Category } from './types';
 
 // Icons mapping
 const IconMap: any = {
@@ -42,6 +42,88 @@ const getStorage = <T,>(key: string, initial: T): T => {
   return data ? JSON.parse(data) : initial;
 };
 
+// --- NEW INFO PAGES ---
+
+const AboutUs: React.FC = () => (
+  <div className="space-y-6 animate-fadeIn">
+    <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-slate-100">
+      <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-6"><Building2 size={32} /></div>
+      <h1 className="text-3xl font-black text-slate-800 mb-4">আমাদের সম্পর্কে</h1>
+      <div className="text-slate-600 space-y-4 leading-relaxed text-sm">
+        <p>পাবনা জেলার বেড়া উপজেলার অন্তর্গত একটি ঐতিহ্যবাহী প্রশাসনিক এলাকা হলো আমিনপুর। এটি যমুনা ও পদ্মা নদীর মোহনায় অবস্থিত একটি গুরুত্বপূর্ণ বাণিজ্যিক ও আবাসিক কেন্দ্র।</p>
+        <p>আমিনপুর থানা ২০১৩ সালে প্রতিষ্ঠিত হয়। এই অঞ্চলের শান্তি-শৃঙ্খলা বজায় রাখা এবং জনগণের দোরগোড়ায় সরকারি সেবা পৌঁছে দেওয়ার লক্ষ্যে এই থানা নিরলস কাজ করে যাচ্ছে। আমাদের এই ডিজিটাল পোর্টালটির উদ্দেশ্য হলো আমিনপুর থানার সকল গুরুত্বপূর্ণ তথ্য, প্রতিষ্ঠান এবং সেবা সম্পর্কে মানুষকে মুহূর্তের মধ্যে তথ্য প্রদান করা।</p>
+        <p>এখানে আপনি শিক্ষা প্রতিষ্ঠান, হাসপাতাল, জনপ্রতিনিধি এবং স্থানীয় খবরের আপডেট পাবেন একদম নিখুঁতভাবে।</p>
+      </div>
+    </div>
+  </div>
+);
+
+const DeveloperInfo: React.FC = () => (
+  <div className="space-y-6 animate-fadeIn">
+    <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-slate-100 text-center">
+      <div className="w-24 h-24 bg-slate-100 rounded-full mx-auto mb-6 flex items-center justify-center overflow-hidden border-4 border-emerald-500">
+        <User size={60} className="text-slate-300" />
+      </div>
+      <h1 className="text-2xl font-black text-slate-800 mb-1">মীর রাব্বি হোসেন</h1>
+      <p className="text-emerald-600 font-bold text-sm mb-6">সফটওয়্যার ইঞ্জিনিয়ার ও টেক-উদ্যোক্তা</p>
+      <div className="text-slate-600 space-y-4 leading-relaxed text-sm text-left">
+        <p>আমি মীর রাব্বি হোসেন, একজন প্রযুক্তি প্রেমী মানুষ। স্থানীয় সমস্যা সমাধানে ডিজিটাল টুলস তৈরি করা আমার নেশা। আমিনপুর থানার মানুষকে একটি একক প্ল্যাটফর্মে সকল তথ্য দেওয়ার লক্ষ্য থেকেই এই "আমিনপুর থানা ডিজিটাল তথ্য বাতায়ন" অ্যাপটি তৈরি করেছি।</p>
+        <p>আমি বিশ্বাস করি, তথ্যের অবাধ প্রবাহ একটি উন্নত সমাজ গঠনে সহায়তা করে। এই প্রজেক্টের মাধ্যমে আমি আমিনপুরের সাধারণ মানুষের জীবনযাত্রাকে আরও সহজ করতে চাই।</p>
+      </div>
+      <div className="mt-8 pt-8 border-t flex justify-center gap-4">
+        <div className="p-3 bg-slate-50 rounded-xl text-slate-600 hover:text-emerald-600 transition-colors"><Globe size={20} /></div>
+        <div className="p-3 bg-slate-50 rounded-xl text-slate-600 hover:text-emerald-600 transition-colors"><Mail size={20} /></div>
+      </div>
+    </div>
+  </div>
+);
+
+const ContactPage: React.FC = () => (
+  <div className="space-y-6 animate-fadeIn">
+    <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-slate-100">
+      <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-6"><Mail size={32} /></div>
+      <h1 className="text-3xl font-black text-slate-800 mb-4">যোগাযোগ করুন</h1>
+      <div className="space-y-4">
+        <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl">
+          <Mail className="text-emerald-600" size={20} />
+          <div>
+            <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest">ইমেইল</p>
+            <p className="text-sm font-bold text-slate-700">mirrabbihossain@gmail.com</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl">
+          <MapPin className="text-emerald-600" size={20} />
+          <div>
+            <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest">ঠিকানা</p>
+            <p className="text-sm font-bold text-slate-700">আমিনপুর বাজার, পাবনা</p>
+          </div>
+        </div>
+      </div>
+      <div className="mt-8 p-6 bg-emerald-600 rounded-2xl text-white text-center">
+        <p className="text-sm font-bold">যে কোনো তথ্যের ভুল সংশোধন বা নতুন তথ্য যুক্ত করতে আমাদের সাথে যোগাযোগ করুন।</p>
+      </div>
+    </div>
+  </div>
+);
+
+const AppInfo: React.FC = () => (
+  <div className="space-y-6 animate-fadeIn">
+    <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-slate-100">
+      <div className="w-16 h-16 bg-rose-100 text-rose-600 rounded-2xl flex items-center justify-center mb-6"><Smartphone size={32} /></div>
+      <h1 className="text-3xl font-black text-slate-800 mb-4">এপস সম্পর্কে</h1>
+      <div className="text-slate-600 space-y-4 leading-relaxed text-sm">
+        <p><strong>নাম:</strong> আমিনপুর থানা ডিজিটাল তথ্য বাতায়ন</p>
+        <p><strong>ভার্সন:</strong> ১.০.০ (স্টেবল)</p>
+        <p><strong>লক্ষ্য:</strong> একটি স্মার্ট আমিনপুর গড়ার লক্ষে থানার সকল গুরুত্বপূর্ণ তথ্যকে ডিজিটালাইজ করা।</p>
+        <p>এই অ্যাপটি ব্যবহার করে আপনি জরুরি মুহূর্তে রক্তদাতা, অ্যাম্বুলেন্স, ফায়ার সার্ভিস এবং পুলিশ প্রশাসনের নম্বর খুব দ্রুত খুঁজে পাবেন।</p>
+      </div>
+      <div className="mt-8 pt-8 border-t flex items-center gap-2 text-rose-500 font-bold text-xs justify-center uppercase tracking-widest">
+        Made with <Heart size={14} fill="currentColor" /> for Aminpur
+      </div>
+    </div>
+  </div>
+);
+
 // --- CLIENT VIEWS ---
 
 const Dashboard: React.FC = () => {
@@ -55,20 +137,20 @@ const Dashboard: React.FC = () => {
   const filteredItems = items.filter(item => isSearching && (item.name.toLowerCase().includes(searchTerm.toLowerCase()) || item.description.toLowerCase().includes(searchTerm.toLowerCase())));
 
   return (
-    <div className="space-y-10 animate-fadeIn">
+    <div className="space-y-8 animate-fadeIn">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-emerald-600 to-teal-800 rounded-[2.5rem] p-8 text-white shadow-2xl text-center relative overflow-hidden">
-        <div className="absolute -top-4 -right-4 opacity-5 rotate-12"><Shield size={120} /></div>
+      <section className="bg-gradient-to-br from-emerald-600 to-teal-800 rounded-[2rem] p-10 text-white shadow-2xl text-center relative overflow-hidden">
+        <div className="absolute -top-4 -right-4 opacity-5 rotate-12"><Shield size={100} /></div>
         
-        <h1 className="text-5xl font-black mb-2 tracking-tight">স্বাগতম!</h1>
-        <p className="opacity-80 text-xs mb-8 font-medium tracking-tight">আমিনপুর থানার সকল তথ্য একসাথে</p>
+        <h1 className="text-4xl font-black mb-1.5 tracking-tight leading-none">স্বাগতম!</h1>
+        <p className="opacity-80 text-[11px] mb-8 font-medium tracking-tight">আমিনপুর থানার সকল তথ্য একসাথে</p>
         
-        <div className="relative group max-w-sm mx-auto z-10">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+        <div className="relative group max-w-[320px] mx-auto z-10">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
           <input 
             type="text" 
             placeholder="কী খুঁজছেন?" 
-            className="w-full pl-11 pr-5 py-3.5 rounded-2xl text-slate-800 bg-white outline-none shadow-xl focus:ring-4 focus:ring-emerald-500/10 transition-all text-sm" 
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl text-slate-800 bg-white outline-none shadow-xl focus:ring-4 focus:ring-emerald-500/10 transition-all text-xs" 
             value={searchTerm} 
             onChange={(e) => setSearchTerm(e.target.value)} 
           />
@@ -96,7 +178,7 @@ const Dashboard: React.FC = () => {
               {filteredCategories.map(cat => (
                 <Link key={cat.id} to={`/category/${cat.id}`} className="flex flex-col items-center justify-center p-5 bg-white rounded-[1.8rem] shadow-sm border border-slate-50 hover:border-emerald-100 transition-all active:scale-95 group">
                   <div className={`w-11 h-11 ${cat.color} rounded-xl flex items-center justify-center text-white mb-3 shadow-md group-hover:scale-110 transition-transform`}><DynamicIcon name={cat.icon} /></div>
-                  <span className="text-[12px] font-bold text-slate-700 text-center">{cat.title}</span>
+                  <span className="text-[11px] font-bold text-slate-700 text-center">{cat.title}</span>
                 </Link>
               ))}
             </div>
@@ -114,7 +196,7 @@ const Dashboard: React.FC = () => {
                   <div className="p-5">
                     <div className="flex items-center gap-1.5 text-[9px] font-black text-emerald-600 mb-2 uppercase tracking-tighter"><Clock size={10} /><span>{article.date}</span></div>
                     <h3 className="text-sm font-bold text-slate-800 mb-2 leading-tight group-hover:text-emerald-700 transition-colors line-clamp-2">{article.title}</h3>
-                    <p className="text-slate-500 text-[11px] line-clamp-2 leading-relaxed">{article.excerpt}</p>
+                    <p className="text-slate-500 text-[10px] line-clamp-2 leading-relaxed">{article.excerpt}</p>
                   </div>
                 </Link>
               ))}
@@ -243,7 +325,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <div className="min-h-screen flex flex-col bg-[#fdfdfd]">
       <header className="bg-emerald-600 text-white shadow-xl fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center h-16">
-        <Link to="/" className="text-xl font-black tracking-tight">আমিনপুর থানা</Link>
+        <Link to="/" className="text-xl font-black tracking-tight leading-none">আমিনপুর থানা</Link>
         <button onClick={() => setIsSidebarOpen(true)} className="p-2 hover:bg-emerald-700 rounded-xl transition-colors"><Menu size={24} /></button>
       </header>
 
@@ -251,8 +333,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       <aside className={`fixed top-0 right-0 h-full w-72 bg-white z-[70] shadow-2xl transition-transform duration-500 ease-in-out transform ${isSidebarOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="p-8 border-b flex flex-col gap-1 bg-slate-50 relative">
           <button onClick={() => setIsSidebarOpen(false)} className="absolute top-4 right-4 text-slate-400 p-2 hover:bg-slate-200 rounded-full transition-colors"><X size={18} /></button>
-          <h2 className="font-black text-emerald-600 text-xl tracking-tighter">আমিনপুর থানা</h2>
-          <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest">ডিজিটাল তথ্য পোর্টাল</p>
+          <h2 className="font-black text-emerald-600 text-xl tracking-tighter leading-none">আমিনপুর থানা</h2>
+          <p className="text-[9px] text-slate-400 font-black uppercase tracking-widest leading-none">ডিজিটাল তথ্য পোর্টাল</p>
         </div>
         
         <nav className="p-6 space-y-2 overflow-y-auto h-[calc(100%-140px)] scrollbar-hide">
@@ -261,35 +343,35 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <span>হোমপেজ</span>
           </Link>
           
-          <button onClick={() => alert('আমাদের সম্পর্কে বিস্তারিত তথ্য শীঘ্রই যুক্ত করা হবে।')} className="w-full flex items-center gap-4 p-4 hover:bg-emerald-50 rounded-2xl text-slate-700 font-bold transition-all text-sm group text-left">
+          <Link to="/about" className="flex items-center gap-4 p-4 hover:bg-emerald-50 rounded-2xl text-slate-700 font-bold transition-all text-sm group">
             <Info size={18} className="text-emerald-600" />
             <span>আমাদের সম্পর্কে</span>
-          </button>
+          </Link>
           
-          <button onClick={() => alert('ডেভেলপার: মীর রাব্বি হোসেন')} className="w-full flex items-center gap-4 p-4 hover:bg-emerald-50 rounded-2xl text-slate-700 font-bold transition-all text-sm group text-left">
+          <Link to="/developer" className="flex items-center gap-4 p-4 hover:bg-emerald-50 rounded-2xl text-slate-700 font-bold transition-all text-sm group">
             <User size={18} className="text-emerald-600" />
             <span>ডেভেলপার সম্পর্কে</span>
-          </button>
+          </Link>
           
-          <button onClick={() => alert('যোগাযোগ করুন: mirrabbihossain@gmail.com')} className="w-full flex items-center gap-4 p-4 hover:bg-emerald-50 rounded-2xl text-slate-700 font-bold transition-all text-sm group text-left">
+          <Link to="/contact" className="flex items-center gap-4 p-4 hover:bg-emerald-50 rounded-2xl text-slate-700 font-bold transition-all text-sm group">
             <Mail size={18} className="text-emerald-600" />
             <span>যোগাযোগ</span>
-          </button>
+          </Link>
           
-          <button onClick={() => alert('আমিনপুর থানা তথ্য বাতায়ন ভার্সন ১.০.০')} className="w-full flex items-center gap-4 p-4 hover:bg-emerald-50 rounded-2xl text-slate-700 font-bold transition-all text-sm group text-left">
+          <Link to="/app-info" className="flex items-center gap-4 p-4 hover:bg-emerald-50 rounded-2xl text-slate-700 font-bold transition-all text-sm group">
             <Smartphone size={18} className="text-emerald-600" />
             <span>এপস সম্পর্কে</span>
-          </button>
+          </Link>
         </nav>
         
         <div className="absolute bottom-8 left-8 right-8 text-center">
-           <p className="text-[9px] text-slate-300 font-black uppercase tracking-widest">আমিনপুর ডিজিটাল বাতায়ন</p>
+           <p className="text-[8px] text-slate-300 font-black uppercase tracking-[0.3em] leading-none">আমিনপুর ডিজিটাল বাতায়ন</p>
         </div>
       </aside>
 
       <main className="flex-grow pt-24 pb-16 px-5 md:max-w-4xl md:mx-auto w-full">{children}</main>
       <footer className="bg-white border-t py-6 text-center">
-        <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest">মীর রাব্বি হোসেন</p>
+        <p className="text-slate-500 text-[9px] font-black uppercase tracking-widest leading-none">মীররাব্বিহোসেন</p>
       </footer>
     </div>
   );
@@ -299,32 +381,62 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
 const AdminLogin: React.FC = () => {
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === 'admin123') {
-      localStorage.setItem('isAdmin', 'true');
-      navigate('/admin/dashboard');
-    } else {
-      alert('ভুল পাসওয়ার্ড!');
-    }
+    setIsLoading(true);
+    // Simple mock logic
+    setTimeout(() => {
+      if (password === 'admin123') {
+        localStorage.setItem('isAdmin', 'true');
+        navigate('/admin/dashboard');
+      } else {
+        alert('ভুল পাসওয়ার্ড!');
+      }
+      setIsLoading(false);
+    }, 800);
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-50 px-6">
-      <div className="max-w-md w-full bg-white p-10 rounded-[2.5rem] shadow-xl border border-slate-100">
-        <h2 className="text-2xl font-black text-slate-800 mb-6 text-center tracking-tight">এডমিন লগইন</h2>
-        <form onSubmit={handleLogin} className="space-y-6">
-          <input 
-            type="password" 
-            placeholder="পাসওয়ার্ড প্রবেশ করুন" 
-            className="w-full px-6 py-4 rounded-2xl border border-slate-200 focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all text-sm"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button type="submit" className="w-full bg-emerald-600 text-white py-4 rounded-2xl font-bold hover:bg-emerald-700 transition-colors shadow-lg shadow-emerald-600/20">প্রবেশ করুন</button>
-        </form>
+      <div className="max-w-md w-full">
+        <div className="bg-white p-10 rounded-[2.5rem] shadow-2xl border border-slate-100 relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-2 bg-emerald-500"></div>
+          
+          <div className="flex flex-col items-center mb-8">
+            <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-4"><Lock size={32} /></div>
+            <h2 className="text-2xl font-black text-slate-800 tracking-tight leading-none">এডমিন প্যানেল</h2>
+            <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest mt-2 leading-none">শুধুমাত্র অনুমোদিত এক্সেস</p>
+          </div>
+
+          <form onSubmit={handleLogin} className="space-y-6">
+            <div className="space-y-2">
+              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">পাসওয়ার্ড</label>
+              <input 
+                type="password" 
+                placeholder="পাসওয়ার্ড প্রবেশ করুন" 
+                className="w-full px-6 py-4 rounded-2xl border border-slate-100 bg-slate-50 focus:bg-white focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all text-sm font-bold"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <button 
+              type="submit" 
+              disabled={isLoading}
+              className={`w-full bg-emerald-600 text-white py-4 rounded-2xl font-bold transition-all shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-2 ${isLoading ? 'opacity-70 cursor-wait' : 'hover:bg-emerald-700 active:scale-[0.98]'}`}
+            >
+              {isLoading ? 'প্রবেশ করা হচ্ছে...' : 'লগইন করুন'}
+              {!isLoading && <ArrowRight size={18} />}
+            </button>
+          </form>
+          
+          <div className="mt-8 text-center">
+            <Link to="/" className="text-xs font-bold text-slate-400 hover:text-emerald-600 transition-colors">ফিরে যান</Link>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -365,24 +477,27 @@ const AdminDashboard: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 p-6 md:p-10">
+    <div className="min-h-screen bg-slate-50 p-6 md:p-10 animate-fadeIn">
       <div className="max-w-6xl mx-auto space-y-8">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <h1 className="text-3xl font-black text-slate-800 tracking-tight">এডমিন ড্যাশবোর্ড</h1>
+          <div>
+            <h1 className="text-3xl font-black text-slate-800 tracking-tight leading-none">ড্যাশবোর্ড</h1>
+            <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest mt-2 leading-none">স্বাগতম, এডমিনিস্ট্রেটর</p>
+          </div>
           <div className="flex gap-3">
-            <button onClick={handleLogout} className="px-5 py-3 bg-white text-slate-600 border border-slate-200 rounded-xl font-bold hover:bg-slate-50 transition-all text-sm">লগ আউট</button>
-            <Link to="/" className="px-5 py-3 bg-emerald-600 text-white rounded-xl font-bold hover:bg-emerald-700 shadow-lg shadow-emerald-600/20 transition-all text-sm">সাইট দেখুন</Link>
+            <button onClick={handleLogout} className="px-5 py-3 bg-white text-slate-600 border border-slate-200 rounded-xl font-bold hover:bg-slate-50 transition-all text-xs">লগ আউট</button>
+            <Link to="/" className="px-5 py-3 bg-emerald-600 text-white rounded-xl font-bold hover:bg-emerald-700 shadow-lg shadow-emerald-600/20 transition-all text-xs">সাইট দেখুন</Link>
           </div>
         </div>
 
         <div className="flex gap-2 p-1.5 bg-white rounded-2xl w-fit shadow-sm border border-slate-100">
           <button 
             onClick={() => setActiveTab('items')}
-            className={`px-6 py-2.5 rounded-xl font-bold transition-all text-sm ${activeTab === 'items' ? 'bg-emerald-600 text-white shadow-md' : 'text-slate-400 hover:text-slate-600'}`}
+            className={`px-6 py-2.5 rounded-xl font-bold transition-all text-xs ${activeTab === 'items' ? 'bg-emerald-600 text-white shadow-md' : 'text-slate-400 hover:text-slate-600'}`}
           >তথ্য সমূহ</button>
           <button 
             onClick={() => setActiveTab('articles')}
-            className={`px-6 py-2.5 rounded-xl font-bold transition-all text-sm ${activeTab === 'articles' ? 'bg-emerald-600 text-white shadow-md' : 'text-slate-400 hover:text-slate-600'}`}
+            className={`px-6 py-2.5 rounded-xl font-bold transition-all text-xs ${activeTab === 'articles' ? 'bg-emerald-600 text-white shadow-md' : 'text-slate-400 hover:text-slate-600'}`}
           >খবরাখবর</button>
         </div>
 
@@ -391,8 +506,8 @@ const AdminDashboard: React.FC = () => {
             <table className="w-full text-left">
               <thead>
                 <tr className="bg-slate-50 border-b border-slate-100">
-                  <th className="px-8 py-4 text-slate-400 font-black text-[9px] uppercase tracking-widest">নাম/শিরোনাম</th>
-                  <th className="px-8 py-4 text-slate-400 font-black text-[9px] uppercase tracking-widest text-right">অ্যাকশন</th>
+                  <th className="px-8 py-4 text-slate-400 font-black text-[9px] uppercase tracking-widest leading-none">নাম/শিরোনাম</th>
+                  <th className="px-8 py-4 text-slate-400 font-black text-[9px] uppercase tracking-widest text-right leading-none">অ্যাকশন</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-50">
@@ -402,13 +517,13 @@ const AdminDashboard: React.FC = () => {
                       <div className="flex items-center gap-4">
                         <img src={item.image} className="w-12 h-12 rounded-xl object-cover" />
                         <div>
-                          <p className="font-bold text-slate-800 text-sm">{item.name}</p>
-                          <p className="text-[10px] text-slate-400">{item.location}</p>
+                          <p className="font-bold text-slate-800 text-sm leading-none">{item.name}</p>
+                          <p className="text-[10px] text-slate-400 mt-1 leading-none">{item.location}</p>
                         </div>
                       </div>
                     </td>
                     <td className="px-8 py-4 text-right">
-                      <button onClick={() => handleDeleteItem(item.id)} className="text-rose-500 font-black hover:text-rose-700 text-[10px] uppercase tracking-widest px-4 py-2 hover:bg-rose-50 rounded-lg transition-all">ডিলিট</button>
+                      <button onClick={() => handleDeleteItem(item.id)} className="text-rose-500 font-black hover:text-rose-700 text-[10px] uppercase tracking-widest px-4 py-2 hover:bg-rose-50 rounded-lg transition-all leading-none">ডিলিট</button>
                     </td>
                   </tr>
                 )) : articles.map(article => (
@@ -417,13 +532,13 @@ const AdminDashboard: React.FC = () => {
                       <div className="flex items-center gap-4">
                         <img src={article.image} className="w-12 h-12 rounded-xl object-cover" />
                         <div>
-                          <p className="font-bold text-slate-800 text-sm">{article.title}</p>
-                          <p className="text-[10px] text-slate-400">{article.date}</p>
+                          <p className="font-bold text-slate-800 text-sm leading-none">{article.title}</p>
+                          <p className="text-[10px] text-slate-400 mt-1 leading-none">{article.date}</p>
                         </div>
                       </div>
                     </td>
                     <td className="px-8 py-4 text-right">
-                      <button onClick={() => handleDeleteArticle(article.id)} className="text-rose-500 font-black hover:text-rose-700 text-[10px] uppercase tracking-widest px-4 py-2 hover:bg-rose-50 rounded-lg transition-all">ডিলিট</button>
+                      <button onClick={() => handleDeleteArticle(article.id)} className="text-rose-500 font-black hover:text-rose-700 text-[10px] uppercase tracking-widest px-4 py-2 hover:bg-rose-50 rounded-lg transition-all leading-none">ডিলিট</button>
                     </td>
                   </tr>
                 ))}
@@ -442,6 +557,10 @@ const App: React.FC = () => {
       <Layout>
         <Routes>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/developer" element={<DeveloperInfo />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/app-info" element={<AppInfo />} />
           <Route path="/category/:categoryId" element={<CategoryListView />} />
           <Route path="/detail/:itemId" element={<DetailView />} />
           <Route path="/article/:articleId" element={<ArticleDetailView />} />
