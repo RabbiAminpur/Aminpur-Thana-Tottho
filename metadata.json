@@ -1,0 +1,7 @@
+{
+  "name": "Aminpur Thana Info Portal",
+  "description": "A comprehensive digital information hub for Aminpur Thana, providing easy access to local services, institutions, and administration.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
