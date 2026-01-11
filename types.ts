@@ -43,6 +43,7 @@ export interface StaffProfile {
   educationalQualification?: string;
   experience?: string;
   address?: string;
+  joiningDate?: string; // New field added
 }
 
 export interface InformationItem {

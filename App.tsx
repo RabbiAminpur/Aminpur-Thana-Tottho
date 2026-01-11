@@ -9,7 +9,7 @@ import {
   PlusCircle, Info, Mail, Lock, Sparkles, ChevronRight, 
   Calendar, UserCheck, Globe, Facebook, Plus, Trash2, 
   Edit, Save, ExternalLink, User as UserIcon, Filter,
-  ArrowLeft, BookOpen, Award, Briefcase, Home
+  ArrowLeft, BookOpen, Award, Briefcase, Home, Clock
 } from 'lucide-react';
 import { CATEGORIES as INITIAL_CATEGORIES, INFO_ITEMS as INITIAL_INFO_ITEMS, ARTICLES as INITIAL_ARTICLES } from './data';
 import { CategoryId, InformationItem, Article, Category, StaffProfile, InfoSection } from './types';
@@ -150,8 +150,15 @@ const CategoryListView: React.FC = () => {
   if (!category) return null;
 
   const hasSubCategories = category.subCategories && category.subCategories.length > 0;
-  const borderColor = category.color.replace('bg-', 'border-');
-  const isSpecialLayout = category.id === CategoryId.EDUCATION || category.id === CategoryId.HOSPITAL;
+  
+  // Custom logic for the requested layouts
+  const isSpecialLayout = [
+    CategoryId.EDUCATION, 
+    CategoryId.HOSPITAL, 
+    CategoryId.CITIZEN_SERVICE, 
+    CategoryId.TRANSPORT, 
+    CategoryId.UNION
+  ].includes(category.id as CategoryId);
 
   if (hasSubCategories && !activeSubId) {
     return (
@@ -194,7 +201,6 @@ const CategoryListView: React.FC = () => {
 
   return (
     <div className="space-y-8 animate-fadeIn">
-      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
         <div className="flex items-center gap-4">
           <button 
@@ -221,17 +227,16 @@ const CategoryListView: React.FC = () => {
         )}
       </div>
 
-      {/* List Grid */}
       <div className={`grid ${isSpecialLayout ? 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4' : 'grid-cols-1 md:grid-cols-2'} gap-4 sm:gap-6`}>
         {list.length > 0 ? list.map(item => (
           isSpecialLayout ? (
-            /* Special Centered Layout (Education & Hospital) */
+            /* Special Centered Layout (Education, Hospital, Citizen, Transport, Union) */
             <Link 
               key={item.id} 
               to={`/detail/${item.id}`} 
               className={`flex flex-col items-center p-4 bg-white/80 rounded-3xl border border-slate-200 hover:bg-white hover:shadow-xl active:scale-[0.98] hover:-translate-y-1 transition-all duration-300 group glass-card text-center`}
             >
-              <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-[5px] overflow-hidden shadow-sm mb-4 border border-slate-100">
+              <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-[5px] overflow-hidden shadow-sm mb-4 border border-slate-100 bg-slate-50">
                 <img 
                   src={item.image} 
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
@@ -253,7 +258,7 @@ const CategoryListView: React.FC = () => {
               to={`/detail/${item.id}`} 
               className={`flex items-center p-2.5 bg-white/80 rounded-3xl border border-slate-200 hover:bg-white hover:shadow-xl active:scale-[0.98] hover:-translate-y-1 transition-all duration-300 group glass-card overflow-hidden`}
             >
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden shadow-sm flex-shrink-0 border-2 border-white">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden shadow-sm flex-shrink-0 border-2 border-white bg-slate-50">
                 <img 
                   src={item.image} 
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
@@ -298,14 +303,17 @@ const DetailView: React.FC = () => {
 
   const isEducation = item.categoryId === CategoryId.EDUCATION;
   const isHospital = item.categoryId === CategoryId.HOSPITAL;
-  const isSpecial = isEducation || isHospital;
+  const isUnion = item.categoryId === CategoryId.UNION;
+  const isCitizen = item.categoryId === CategoryId.CITIZEN_SERVICE;
+  const isTransport = item.categoryId === CategoryId.TRANSPORT;
+  const isSpecialGrid = isEducation || isHospital || isUnion || isCitizen || isTransport;
 
   return (
     <div className="animate-fadeIn max-w-4xl mx-auto space-y-8 pb-20">
       <button onClick={() => navigate(-1)} className="p-3 bg-white rounded-xl shadow-sm border border-slate-200 hover:bg-slate-50 transition-all"><ChevronLeft size={20}/></button>
 
       <div className="space-y-10">
-        <div className="w-full aspect-video md:h-[450px] rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white">
+        <div className="w-full aspect-video md:h-[450px] rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white bg-white">
           <img src={item.image} className="w-full h-full object-cover" alt="" />
         </div>
 
@@ -323,11 +331,11 @@ const DetailView: React.FC = () => {
           </div>
         </div>
 
-        {/* Info Grid - 2 Columns for Special items */}
+        {/* Info Grid - 2 Columns for Special categories */}
         <div className="space-y-6">
           <h3 className="text-xl font-black text-slate-800 border-l-6 border-emerald-600 pl-4">সাধারণ তথ্য</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {isSpecial && item.establishmentYear && (
+          <div className={`grid ${isSpecialGrid ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1'} gap-4`}>
+            {item.establishmentYear && (
               <div className="p-5 bg-white rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between">
                 <span className="font-bold text-slate-500">প্রতিষ্ঠার সাল</span>
                 <span className="font-black text-emerald-600"> {item.establishmentYear}</span>
@@ -347,20 +355,20 @@ const DetailView: React.FC = () => {
           <p className="text-slate-700 text-lg leading-relaxed whitespace-pre-line bg-white/60 p-8 sm:p-10 rounded-[2.5rem] shadow-inner border border-white">{item.description}</p>
         </div>
 
-        {/* Teachers/Staff List - Single Column Compact Box Design */}
+        {/* Staff/Profile List */}
         {item.staff && item.staff.length > 0 && (
           <div className="space-y-6">
             <h3 className="text-xl font-black text-slate-800 border-l-6 border-emerald-600 pl-4">
-              {isEducation ? 'শিক্ষকদের তালিকা' : isHospital ? 'ডাক্তারগণের তালিকা' : 'দায়িত্বরত ব্যক্তিবর্গ'}
+              {isEducation ? 'শিক্ষকদের তালিকা' : isHospital ? 'ডাক্তারগণের তালিকা' : isUnion ? 'চেয়ারম্যান ও মেম্বারদের তালিকা' : 'দায়িত্বরত ব্যক্তিবর্গ'}
             </h3>
-            <div className={`grid ${isSpecial ? 'grid-cols-1 max-w-2xl mx-auto' : 'grid-cols-1 md:grid-cols-2'} gap-3 sm:gap-4`}>
+            <div className={`grid ${isUnion ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1 md:grid-cols-2'} gap-3 sm:gap-4`}>
               {item.staff.map(s => (
                 <Link 
                   key={s.id} 
                   to={`/detail/${item.id}/staff/${s.id}`} 
                   className={`flex items-center gap-3 p-3 sm:p-4 bg-white border border-slate-200 rounded-[1.2rem] hover:border-emerald-500 hover:shadow-lg transition-all shadow-sm group glass-card overflow-hidden`}
                 >
-                  <div className="w-10 h-10 sm:w-14 sm:h-14 flex-shrink-0 rounded-xl overflow-hidden border-2 border-white shadow-sm">
+                  <div className="w-10 h-10 sm:w-14 sm:h-14 flex-shrink-0 rounded-xl overflow-hidden border-2 border-white shadow-sm bg-slate-50">
                     <img src={s.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="" />
                   </div>
                   <div className="min-w-0 flex-grow">
@@ -396,7 +404,7 @@ const StaffDetailView: React.FC = () => {
         {/* Top Header Card */}
         <div className="text-center space-y-6">
           <div className="relative inline-block">
-            <img src={staff.image} className="w-40 h-40 sm:w-48 sm:h-48 rounded-[3rem] object-cover mx-auto border-8 border-white shadow-2xl" alt="" />
+            <img src={staff.image} className="w-40 h-40 sm:w-48 sm:h-48 rounded-[3rem] object-cover mx-auto border-8 border-white shadow-2xl bg-white" alt="" />
             <div className="absolute -bottom-2 -right-2 w-12 h-12 bg-emerald-600 text-white rounded-2xl flex items-center justify-center border-4 border-white shadow-xl">
                <UserIcon size={22} />
             </div>
@@ -411,6 +419,18 @@ const StaffDetailView: React.FC = () => {
 
         {/* Detailed Profile Information */}
         <div className="space-y-4">
+          {staff.joiningDate && (
+            <div className="flex gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-100 group">
+              <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                <Clock size={22} />
+              </div>
+              <div>
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">দায়িত্ব গ্রহণের তারিখ</p>
+                <p className="text-slate-800 font-bold text-lg">{staff.joiningDate}</p>
+              </div>
+            </div>
+          )}
+
           {staff.educationalQualification && (
             <div className="flex gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-100 group">
               <div className="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
@@ -489,6 +509,9 @@ const StaffDetailView: React.FC = () => {
   );
 };
 
+// ... Admin components stay largely the same but would need fields for joiningDate ...
+// For brevity, I'll update the staff editor part of AdminItemEditor
+
 const AdminDashboard: React.FC = () => {
   const navigate = useNavigate();
   const [items, setItems] = useState<InformationItem[]>([]);
@@ -519,7 +542,7 @@ const AdminDashboard: React.FC = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {items.map(i => (
           <div key={i.id} className="bg-white p-5 rounded-[2.5rem] border border-slate-200 shadow-sm space-y-4 hover:shadow-lg transition-all group">
-            <div className="relative h-40 overflow-hidden rounded-[1.8rem]">
+            <div className="relative h-40 overflow-hidden rounded-[1.8rem] bg-slate-50">
               <img src={i.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="" />
             </div>
             <h3 className="font-black text-slate-800 truncate text-sm px-2">{i.name}</h3>
@@ -654,7 +677,7 @@ const AdminItemEditor: React.FC = () => {
 
         <div className="space-y-6 pt-10 border-t border-slate-100">
           <div className="flex justify-between items-center px-1">
-            <h3 className="font-black text-xl">ব্যক্তিবর্গ</h3>
+            <h3 className="font-black text-xl">ব্যক্তিবর্গ / চেয়ারম্যান-মেম্বার</h3>
             <button onClick={addStaff} className="px-5 py-2.5 bg-blue-600 text-white rounded-xl font-bold text-xs shadow-lg shadow-blue-100 active:scale-95 transition-transform">প্রোফাইল যোগ করুন</button>
           </div>
           {item.staff?.map(s => (
@@ -667,10 +690,14 @@ const AdminItemEditor: React.FC = () => {
                 const updated = item.staff?.map(st => st.id === s.id ? {...st, designation: e.target.value} : st);
                 setItem({...item, staff: updated});
               }} className="p-4 bg-white rounded-xl font-bold text-sm border-2 border-slate-100" />
+              <input placeholder="দায়িত্ব গ্রহণের তারিখ" value={s.joiningDate} onChange={e => {
+                const updated = item.staff?.map(st => st.id === s.id ? {...st, joiningDate: e.target.value} : st);
+                setItem({...item, staff: updated});
+              }} className="p-4 bg-white rounded-xl font-bold text-sm border-2 border-slate-100" />
               <input placeholder="ছবি URL" value={s.image} onChange={e => {
                 const updated = item.staff?.map(st => st.id === s.id ? {...st, image: e.target.value} : st);
                 setItem({...item, staff: updated});
-              }} className="p-4 bg-white rounded-xl font-bold text-sm col-span-full border-2 border-slate-100" />
+              }} className="p-4 bg-white rounded-xl font-bold text-sm border-2 border-slate-100" />
               <input placeholder="শিক্ষাগত যোগ্যতা" value={s.educationalQualification} onChange={e => {
                 const updated = item.staff?.map(st => st.id === s.id ? {...st, educationalQualification: e.target.value} : st);
                 setItem({...item, staff: updated});
@@ -709,7 +736,7 @@ const AdminLogin: React.FC = () => {
   return (
     <div className="min-h-screen flex items-center justify-center p-6 relative">
       <AnimatedBackground />
-      <div className="w-full max-w-sm bg-white/90 p-12 rounded-[4rem] shadow-2xl border border-white text-center space-y-10 glass-card">
+      <div className="w-full max-sm bg-white/90 p-12 rounded-[4rem] shadow-2xl border border-white text-center space-y-10 glass-card">
         <div className="w-20 h-20 bg-emerald-600 text-white rounded-[2.2rem] flex items-center justify-center mx-auto shadow-xl"><Lock size={32}/></div>
         <div className="space-y-2">
           <h2 className="text-2xl font-black tracking-tight">এডমিন এক্সেস</h2>

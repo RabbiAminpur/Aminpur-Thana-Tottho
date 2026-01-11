@@ -17,10 +17,51 @@ export const CATEGORIES: Category[] = [
   },
   { id: CategoryId.HOSPITAL, title: 'হাসপাতাল ও ক্লিনিক', icon: 'hospital', color: 'bg-rose-500' },
   { id: CategoryId.DOCTORS, title: 'ডাক্তারগণ', icon: 'stethoscope', color: 'bg-teal-500' },
-  { id: CategoryId.CITIZEN_SERVICE, title: 'নাগরিক সেবা', icon: 'user-check', color: 'bg-purple-600' },
-  { id: CategoryId.UNION, title: 'ইউনিয়ন পরিষদ', icon: 'building', color: 'bg-blue-600' },
+  { 
+    id: CategoryId.CITIZEN_SERVICE, 
+    title: 'নাগরিক সেবা', 
+    icon: 'user-check', 
+    color: 'bg-purple-600',
+    subCategories: [
+      { id: 'birth-reg', title: 'জন্ম নিবন্ধন' },
+      { id: 'death-reg', title: 'মৃত্যু নিবন্ধন' },
+      { id: 'trade-license', title: 'ট্রেড লাইসেন্স' },
+      { id: 'character-cert', title: 'চারিত্রিক সনদ' },
+      { id: 'inheritance-cert', title: 'ওয়ারিশ সনদ' },
+      { id: 'e-porcha', title: 'ই-পর্চা' },
+      { id: 'e-khatian', title: 'ই-খতিয়ান' },
+    ]
+  },
+  { 
+    id: CategoryId.UNION, 
+    title: 'ইউনিয়ন পরিষদ', 
+    icon: 'building', 
+    color: 'bg-blue-600',
+    subCategories: [
+      { id: 'jatpur', title: 'জাতপুর ইউনিয়ন' },
+      { id: 'ruppur', title: 'রূপপুর ইউনিয়ন' },
+      { id: 'masumdia', title: 'মাশুমদিিয়া ইউনিয়ন' },
+      { id: 'puran-bharenga', title: 'পুরাণ ভারেঙ্গা ইউনিয়ন' },
+      { id: 'khas-aminpur', title: 'খাস আমিনপুর ইউনিয়ন' },
+      { id: 'sagarkandi', title: 'সাগরকান্দি ইউনিয়ন' },
+      { id: 'raninagar', title: 'রানীনগর ইউনিয়ন' },
+      { id: 'ahmadpur', title: 'আহম্মদপুর ইউনিয়ন' },
+    ]
+  },
   { id: CategoryId.COURIER, title: 'কুরিয়ার সার্ভিস', icon: 'package', color: 'bg-orange-500' },
-  { id: CategoryId.TRANSPORT, title: 'পরিবহন সেবা', icon: 'bus', color: 'bg-amber-500' },
+  { 
+    id: CategoryId.TRANSPORT, 
+    title: 'পরিবহন সেবা', 
+    icon: 'bus', 
+    color: 'bg-amber-500',
+    subCategories: [
+      { id: 'bus', title: 'বাস' },
+      { id: 'train', title: 'ট্রেন' },
+      { id: 'ferry', title: 'ফেরি' },
+      { id: 'launch', title: 'লঞ্চ' },
+      { id: 'speedboat', title: 'স্পিডবোট' },
+    ]
+  },
   { id: CategoryId.SIGHTSEEING, title: 'দর্শনীয় স্থান', icon: 'camera', color: 'bg-pink-500' },
   { id: CategoryId.MEDIA, title: 'গণমাধ্যম ও সাংবাদিক', icon: 'mic', color: 'bg-red-600' },
   { id: CategoryId.GOVT, title: 'সরকারী অফিস', icon: 'govt-building', color: 'bg-indigo-600' },
@@ -79,20 +120,22 @@ export const INFO_ITEMS: InformationItem[] = [
     ]
   },
   {
-    id: '1',
+    id: 'union-1',
     categoryId: CategoryId.UNION,
-    name: 'জাতপুর ইউনিয়ন পরিষদ',
+    subCategoryId: 'jatpur',
+    name: 'জাতপুর ইউনিয়ন পরিষদ কার্যালয়',
     image: 'https://images.unsplash.com/photo-1590060153074-303de9911bd7?q=80&w=800',
     description: 'আমিনপুর থানার ১নং ইউনিয়ন পরিষদ। এটি একটি অত্যন্ত গুরুত্বপূর্ণ প্রশাসনিক এলাকা। যমুনা নদীর কোল ঘেঁষে গড়ে ওঠা এই ইউনিয়নের অধিকাংশ মানুষ কৃষি এবং ব্যবসার সাথে জড়িত।',
     location: 'জাতপুর বাজার, আমিনপুর, পাবনা।',
     phone: '০১৭০০-১১১২২২',
+    establishmentYear: '১৯৬৩',
     infoSections: [
       {
         id: 'sec1',
         title: 'প্রশাসনিক তথ্য',
         fields: [
-          { label: 'চেয়ারম্যান', value: 'মোঃ নজরুল ইসলাম' },
-          { label: 'সচিব', value: 'মোঃ রফিকুল ইসলাম' }
+          { label: 'সচিব', value: 'মোঃ রফিকুল ইসলাম' },
+          { label: 'গ্রাম সংখ্যা', value: '১৪টি' }
         ]
       }
     ],
