@@ -9,7 +9,7 @@ import {
   PlusCircle, Info, Mail, Lock, Sparkles, ChevronRight, 
   Calendar, UserCheck, Globe, Facebook, Plus, Trash2, 
   Edit, Save, ExternalLink, User as UserIcon, Filter,
-  ArrowLeft, BookOpen, Award, Briefcase, Home, Clock, Download, LogOut, Settings, Database
+  ArrowLeft, BookOpen, Award, Briefcase, Home, Clock, Download, LogOut, Settings, Database, CloudUpload
 } from 'lucide-react';
 import { CATEGORIES as INITIAL_CATEGORIES, INFO_ITEMS as INITIAL_INFO_ITEMS } from './data';
 import { CategoryId, InformationItem, Category, StaffProfile } from './types';
@@ -303,6 +303,8 @@ const AdminLogin: React.FC = () => {
 const AdminDashboard: React.FC = () => {
   const navigate = useNavigate();
   const [items, setItems] = useState<InformationItem[]>([]);
+  // Use consistent category retrieval from storage to avoid missing reference errors
+  const categories = getStorage<Category[]>('categories', INITIAL_CATEGORIES);
 
   useEffect(() => {
     if (localStorage.getItem('isAdmin') !== 'true') navigate('/admin');
@@ -310,46 +312,89 @@ const AdminDashboard: React.FC = () => {
   }, [navigate]);
 
   const handleExport = () => {
-    const dataString = `
-import { CategoryId, Category, InformationItem, Article } from './types';
+    // Use the already retrieved categories for export
+    const categoriesToExport = categories;
+    
+    const dataString = `import { CategoryId, Category, InformationItem, Article } from './types';
 
-export const CATEGORIES: Category[] = ${JSON.stringify(INITIAL_CATEGORIES, null, 2)};
+export const CATEGORIES: Category[] = ${JSON.stringify(categoriesToExport, null, 2)};
 
 export const INFO_ITEMS: InformationItem[] = ${JSON.stringify(items, null, 2)};
 
-export const ARTICLES: Article[] = [];
-`;
+export const ARTICLES: Article[] = [];`;
+
     const blob = new Blob([dataString], { type: 'text/typescript' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
     link.download = 'data.ts';
     link.click();
-    alert('ডেটা এক্সপোর্ট সফল হয়েছে! এই ফাইলটি আপনার প্রজেক্টের data.ts এর সাথে পরিবর্তন করুন এবং গিটহাবে পুশ করুন।');
+    
+    alert('অভিনন্দন! আপনার ডেটা সম্বলিত "data.ts" ফাইলটি ডাউনলোড হয়েছে। \n\nকিভাবে গিটহাবে পুশ করবেন: \n১. গিটহাবে আপনার প্রজেক্টের data.ts ফাইলটি ওপেন করুন। \n২. ডিলিট করে ডাউনলোড করা ফাইলের কোডটি পেস্ট করুন। \n৩. সেভ বা Commit করুন। \nতাহলে সকল ইউজার আপনার নতুন তথ্যগুলো দেখতে পাবে।');
   };
 
   return (
     <div className="p-6 max-w-6xl mx-auto space-y-8 animate-fadeIn">
-      <div className="flex flex-col sm:flex-row justify-between items-center bg-white p-6 rounded-[2.5rem] border border-slate-200 gap-4 shadow-sm">
-        <div className="flex items-center gap-4">
-           <div className="w-12 h-12 bg-slate-900 text-white rounded-xl flex items-center justify-center"><LayoutDashboard size={24}/></div>
-           <h1 className="text-xl font-black uppercase tracking-tight">মেইন ড্যাশবোর্ড</h1>
+      {/* Header with Stats and Actions */}
+      <div className="bg-white p-8 rounded-[3rem] border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-center gap-8">
+        <div className="flex items-center gap-6">
+           <div className="w-16 h-16 bg-slate-900 text-white rounded-3xl flex items-center justify-center shadow-2xl shadow-slate-200"><LayoutDashboard size={32}/></div>
+           <div>
+             <h1 className="text-2xl font-black uppercase tracking-tight text-slate-900">অ্যাডমিন প্যানেল</h1>
+             <p className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+               <Database size={12} className="text-emerald-500"/> মোট তথ্য: {items.length} টি
+             </p>
+           </div>
         </div>
-        <div className="flex gap-2">
-          <button onClick={() => navigate('/admin/item/new')} className="px-6 py-3 bg-emerald-600 text-white rounded-xl font-bold flex items-center gap-2 text-sm shadow-xl active:scale-95"><Plus size={18}/> নতুন তথ্য</button>
-          <button onClick={handleExport} className="px-4 py-3 bg-indigo-50 text-indigo-600 rounded-xl font-bold text-sm flex items-center gap-2 hover:bg-indigo-100" title="Export for GitHub"><Download size={18}/></button>
-          <button onClick={() => { localStorage.removeItem('isAdmin'); navigate('/admin'); }} className="px-4 py-3 bg-rose-50 text-rose-600 rounded-xl font-bold text-sm hover:bg-rose-100"><LogOut size={18}/></button>
+        
+        <div className="flex flex-wrap gap-3 w-full md:w-auto">
+          <button onClick={() => navigate('/admin/item/new')} className="flex-grow md:flex-none px-6 py-4 bg-emerald-600 text-white rounded-2xl font-bold flex items-center justify-center gap-2 text-sm shadow-xl shadow-emerald-500/20 active:scale-95 transition-all">
+            <Plus size={20}/> নতুন তথ্য যোগ
+          </button>
+          
+          <button 
+            onClick={handleExport} 
+            className="flex-grow md:flex-none px-6 py-4 bg-slate-900 text-white rounded-2xl font-bold flex items-center justify-center gap-2 text-sm shadow-xl shadow-slate-900/10 active:scale-95 transition-all"
+            title="GitHub Update Preparation"
+          >
+            <CloudUpload size={20} className="text-blue-400"/> গিটহাবে পুশ করুন (Export)
+          </button>
+          
+          <button onClick={() => { localStorage.removeItem('isAdmin'); navigate('/admin'); }} className="px-6 py-4 bg-rose-50 text-rose-600 rounded-2xl font-bold text-sm hover:bg-rose-100 active:scale-95 transition-all">
+            <LogOut size={20}/>
+          </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+      {/* Sync Banner */}
+      <div className="bg-blue-50 border border-blue-100 p-6 rounded-[2rem] flex items-start gap-4">
+        <div className="p-3 bg-blue-100 text-blue-600 rounded-2xl"><Info size={24}/></div>
+        <div className="space-y-1">
+          <h3 className="font-black text-blue-900">গিটহাব সিনক্রোনাইজেশন কি?</h3>
+          <p className="text-sm text-blue-700 leading-relaxed">
+            আপনি যখন এখানে কোনো নতুন তথ্য যোগ করেন, সেটি আপনার ব্রাউজারের মেমোরিতে থাকে। 
+            গিটহাবে আপডেট করতে <b>"গিটহাবে পুশ করুন"</b> বাটনে ক্লিক করে ফাইলটি ডাউনলোড করুন 
+            এবং আপনার প্রজেক্টের <b>data.ts</b> ফাইলটি রিপ্লেস করুন।
+          </p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
         {items.map(i => (
-          <div key={i.id} className="bg-white p-4 rounded-[2rem] border border-slate-200 shadow-sm space-y-3 group hover:shadow-lg transition-all">
-            <div className="aspect-square rounded-2xl overflow-hidden bg-slate-100"><img src={i.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="" /></div>
-            <div className="px-1"><h3 className="font-black text-slate-800 truncate text-xs">{i.name}</h3></div>
-            <div className="flex gap-1.5">
-              <button onClick={() => navigate(`/admin/item/edit/${i.id}`)} className="flex-grow py-2.5 bg-slate-900 text-white rounded-xl font-bold text-[10px] uppercase tracking-wider active:scale-95">এডিট</button>
-              <button onClick={() => { if(confirm('ডিলিট করতে চান?')) { const u = items.filter(x => x.id !== i.id); setItems(u); setStorage('items', u); } }} className="w-10 h-10 bg-rose-50 text-rose-600 rounded-xl flex items-center justify-center hover:bg-rose-600 hover:text-white transition-all"><Trash2 size={16}/></button>
+          <div key={i.id} className="bg-white p-5 rounded-[2.5rem] border border-slate-200 shadow-sm space-y-4 group hover:shadow-xl hover:-translate-y-1 transition-all">
+            <div className="aspect-square rounded-[1.8rem] overflow-hidden bg-slate-100 border border-slate-50 relative">
+              <img src={i.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="" />
+              <div className="absolute top-3 left-3 px-3 py-1 bg-white/90 backdrop-blur-md rounded-full text-[8px] font-black text-slate-900 uppercase tracking-tighter shadow-sm border border-white">
+                {categories.find(c => c.id === i.categoryId)?.title}
+              </div>
+            </div>
+            <div className="px-1 space-y-1">
+              <h3 className="font-black text-slate-800 truncate text-xs">{i.name}</h3>
+              <p className="text-[9px] font-bold text-slate-400 truncate">{i.location}</p>
+            </div>
+            <div className="flex gap-2">
+              <button onClick={() => navigate(`/admin/item/edit/${i.id}`)} className="flex-grow py-3 bg-slate-50 text-slate-900 rounded-xl font-black text-[10px] uppercase tracking-wider hover:bg-slate-900 hover:text-white transition-all">এডিট</button>
+              <button onClick={() => { if(confirm('আপনি কি নিশ্চিত যে এই তথ্যটি মুছে ফেলতে চান?')) { const u = items.filter(x => x.id !== i.id); setItems(u); setStorage('items', u); } }} className="w-12 h-12 bg-rose-50 text-rose-600 rounded-xl flex items-center justify-center hover:bg-rose-600 hover:text-white active:scale-90 transition-all shadow-sm shadow-rose-100"><Trash2 size={18}/></button>
             </div>
           </div>
         ))}
@@ -377,6 +422,10 @@ const AdminItemEditor: React.FC = () => {
   }, [id]);
 
   const save = () => {
+    if (!item.name || !item.categoryId) {
+      alert('অনুগ্রহ করে নাম এবং ক্যাটাগরি পূরণ করুন।');
+      return;
+    }
     const existing = getStorage<InformationItem[]>('items', INITIAL_INFO_ITEMS);
     const updated = id ? existing.map(i => i.id === id ? item as InformationItem : i) : [...existing, item as InformationItem];
     setStorage('items', updated);
@@ -390,70 +439,94 @@ const AdminItemEditor: React.FC = () => {
   return (
     <div className="p-6 max-w-4xl mx-auto space-y-8 pb-40 animate-fadeIn">
       <div className="flex items-center gap-4">
-        <button onClick={() => navigate(-1)} className="p-3 bg-white rounded-xl shadow-sm border border-slate-200 hover:bg-slate-50 transition-all"><ChevronLeft size={20}/></button>
-        <h2 className="text-2xl font-black tracking-tight text-slate-800">{id ? 'তথ্য সম্পাদন' : 'নতুন তথ্য যুক্ত করুন'}</h2>
+        <button onClick={() => navigate(-1)} className="p-4 bg-white rounded-2xl shadow-sm border border-slate-200 hover:bg-slate-50 transition-all active:scale-90"><ChevronLeft size={20}/></button>
+        <div className="space-y-1">
+          <h2 className="text-2xl font-black tracking-tight text-slate-900">{id ? 'তথ্য সম্পাদন' : 'নতুন তথ্য যুক্ত করুন'}</h2>
+          <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{id ? 'বিদ্যমান তথ্য পরিবর্তন করুন' : 'নতুন একটি ডাটা তৈরি করুন'}</p>
+        </div>
       </div>
 
-      <div className="bg-white p-8 sm:p-12 rounded-[3.5rem] border border-slate-200 shadow-2xl space-y-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-1">
-            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-2">প্রধান ক্যাটাগরি</label>
-            <select value={item.categoryId} onChange={e => setItem({...item, categoryId: e.target.value as CategoryId, subCategoryId: undefined})} className="w-full p-4 bg-slate-50 rounded-2xl border-2 border-slate-100 font-bold outline-none focus:border-emerald-500 transition-all">
+      <div className="bg-white p-8 sm:p-12 rounded-[3.5rem] border border-slate-200 shadow-2xl space-y-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="space-y-2">
+            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest px-2">প্রধান ক্যাটাগরি</label>
+            <select value={item.categoryId} onChange={e => setItem({...item, categoryId: e.target.value as CategoryId, subCategoryId: undefined})} className="w-full p-4 bg-slate-50 rounded-2xl border-2 border-transparent outline-none focus:border-emerald-500 focus:bg-white font-bold transition-all shadow-inner">
               {categories.map(c => <option key={c.id} value={c.id}>{c.title}</option>)}
             </select>
           </div>
-          <div className="space-y-1">
-            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-2">সাব-ক্যাটাগরি</label>
-            <select value={item.subCategoryId || ''} onChange={e => setItem({...item, subCategoryId: e.target.value})} className="w-full p-4 bg-slate-50 rounded-2xl border-2 border-slate-100 font-bold outline-none focus:border-emerald-500 transition-all">
+          <div className="space-y-2">
+            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest px-2">সাব-ক্যাটাগরি</label>
+            <select value={item.subCategoryId || ''} onChange={e => setItem({...item, subCategoryId: e.target.value})} className="w-full p-4 bg-slate-50 rounded-2xl border-2 border-transparent outline-none focus:border-emerald-500 focus:bg-white font-bold transition-all shadow-inner">
               <option value="">নির্বাচন করুন</option>
               {categories.find(c => c.id === item.categoryId)?.subCategories?.map(s => <option key={s.id} value={s.id}>{s.title}</option>)}
             </select>
           </div>
-          <div className="space-y-1">
-            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-2">নাম / শিরোনাম</label>
-            <input value={item.name} onChange={e => setItem({...item, name: e.target.value})} className="w-full p-4 bg-slate-50 rounded-2xl border-2 border-slate-100 font-bold outline-none focus:border-emerald-500 transition-all" />
+          <div className="space-y-2 md:col-span-2">
+            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest px-2">নাম / শিরোনাম</label>
+            <input value={item.name} onChange={e => setItem({...item, name: e.target.value})} className="w-full p-5 bg-slate-50 rounded-2xl border-2 border-transparent outline-none focus:border-emerald-500 focus:bg-white font-bold transition-all shadow-inner" placeholder="যেমন: আমিনপুর মডেল স্কুল" />
           </div>
-          <div className="space-y-1">
-            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-2">ছবির URL</label>
-            <input value={item.image} onChange={e => setItem({...item, image: e.target.value})} className="w-full p-4 bg-slate-50 rounded-2xl border-2 border-slate-100 font-bold outline-none focus:border-emerald-500 transition-all" />
+          <div className="space-y-2">
+            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest px-2">ছবির URL</label>
+            <input value={item.image} onChange={e => setItem({...item, image: e.target.value})} className="w-full p-5 bg-slate-50 rounded-2xl border-2 border-transparent outline-none focus:border-emerald-500 focus:bg-white font-bold transition-all shadow-inner" placeholder="https://..." />
           </div>
-          <div className="space-y-1">
-            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-2">প্রতিষ্ঠার সাল</label>
-            <input value={item.establishmentYear} onChange={e => setItem({...item, establishmentYear: e.target.value})} className="w-full p-4 bg-slate-50 rounded-2xl border-2 border-slate-100 font-bold outline-none focus:border-emerald-500 transition-all" />
+          <div className="space-y-2">
+            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest px-2">প্রতিষ্ঠার সাল</label>
+            <input value={item.establishmentYear} onChange={e => setItem({...item, establishmentYear: e.target.value})} className="w-full p-5 bg-slate-50 rounded-2xl border-2 border-transparent outline-none focus:border-emerald-500 focus:bg-white font-bold transition-all shadow-inner" placeholder="যেমন: ১৯৯০" />
           </div>
-          <div className="space-y-1">
-            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-2">অবস্থান/ঠিকানা</label>
-            <input value={item.location} onChange={e => setItem({...item, location: e.target.value})} className="w-full p-4 bg-slate-50 rounded-2xl border-2 border-slate-100 font-bold outline-none focus:border-emerald-500 transition-all" />
+          <div className="space-y-2">
+            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest px-2">অবস্থান/ঠিকানা</label>
+            <input value={item.location} onChange={e => setItem({...item, location: e.target.value})} className="w-full p-5 bg-slate-50 rounded-2xl border-2 border-transparent outline-none focus:border-emerald-500 focus:bg-white font-bold transition-all shadow-inner" placeholder="যেমন: আমিনপুর বাজার" />
+          </div>
+          <div className="space-y-2">
+            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest px-2">যোগাযোগ নম্বর</label>
+            <input value={item.phone} onChange={e => setItem({...item, phone: e.target.value})} className="w-full p-5 bg-slate-50 rounded-2xl border-2 border-transparent outline-none focus:border-emerald-500 focus:bg-white font-bold transition-all shadow-inner" placeholder="+৮৮০১৭..." />
           </div>
         </div>
 
-        <div className="space-y-1">
-          <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-2">বিস্তারিত বর্ণনা</label>
-          <textarea rows={6} value={item.description} onChange={e => setItem({...item, description: e.target.value})} className="w-full p-6 bg-slate-50 rounded-[2rem] border-2 border-slate-100 font-bold outline-none focus:border-emerald-500 transition-all" />
+        <div className="space-y-2">
+          <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest px-2">বিস্তারিত বর্ণনা</label>
+          <textarea rows={6} value={item.description} onChange={e => setItem({...item, description: e.target.value})} className="w-full p-8 bg-slate-50 rounded-[2.5rem] border-2 border-transparent outline-none focus:border-emerald-500 focus:bg-white font-bold transition-all shadow-inner" placeholder="এই প্রতিষ্ঠানের ইতিহাস বা অন্যান্য তথ্য এখানে লিখুন..." />
         </div>
 
-        <div className="space-y-6 pt-10 border-t border-slate-100">
-           <div className="flex justify-between items-center px-1">
-             <h3 className="text-xl font-black text-slate-800">{isEducation ? 'শিক্ষকদের প্রোফাইল' : isHospital ? 'ডাক্তারদের প্রোফাইল' : isUnion ? 'চেয়ারম্যান ও মেম্বারদের প্রোফাইল' : 'ব্যক্তিবর্গের প্রোফাইল'}</h3>
-             <button onClick={() => setItem({...item, staff: [...(item.staff || []), { id: Date.now().toString(), name: '', designation: '', image: '' }]})} className="px-4 py-2 bg-slate-900 text-white rounded-xl font-bold text-[10px] uppercase tracking-widest">+ প্রোফাইল যোগ</button>
+        {/* Dynamic Staff/Personnel Section */}
+        <div className="space-y-8 pt-12 border-t border-slate-100">
+           <div className="flex justify-between items-center px-2">
+             <div className="space-y-1">
+               <h3 className="text-xl font-black text-slate-900">
+                 {isEducation ? 'শিক্ষকদের প্রোফাইল' : isHospital ? 'ডাক্তারদের প্রোফাইল' : isUnion ? 'চেয়ারম্যান ও মেম্বারদের প্রোফাইল' : 'সংশ্লিষ্ট ব্যক্তিবর্গ'}
+               </h3>
+               <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">ব্যক্তিগত প্রোফাইল এবং কন্টাক্ট ইনফো</p>
+             </div>
+             <button 
+               onClick={() => setItem({...item, staff: [...(item.staff || []), { id: Date.now().toString(), name: '', designation: '', image: '' }]})} 
+               className="px-5 py-3 bg-slate-900 text-white rounded-2xl font-bold text-[10px] uppercase tracking-widest shadow-xl shadow-slate-200 active:scale-95 transition-all"
+             >
+               + প্রোফাইল যোগ করুন
+             </button>
            </div>
-           <div className="grid grid-cols-1 gap-4">
+           
+           <div className="space-y-6">
              {item.staff?.map(s => (
-               <div key={s.id} className="p-8 bg-slate-50 rounded-[2.5rem] border border-slate-200 relative grid grid-cols-1 sm:grid-cols-2 gap-4">
-                 <button onClick={() => setItem({...item, staff: item.staff?.filter(st => st.id !== s.id)})} className="absolute -top-3 -right-3 w-8 h-8 bg-rose-600 text-white rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-all"><Trash2 size={14}/></button>
-                 <div className="space-y-1"><label className="text-[9px] font-black text-slate-400 uppercase tracking-widest px-1">নাম</label><input value={s.name} onChange={e => setItem({...item, staff: item.staff?.map(st => st.id === s.id ? {...st, name: e.target.value} : st)})} className="w-full p-3 bg-white rounded-xl border border-slate-200 font-bold text-sm" /></div>
-                 <div className="space-y-1"><label className="text-[9px] font-black text-slate-400 uppercase tracking-widest px-1">পদবী</label><input value={s.designation} onChange={e => setItem({...item, staff: item.staff?.map(st => st.id === s.id ? {...st, designation: e.target.value} : st)})} className="w-full p-3 bg-white rounded-xl border border-slate-200 font-bold text-sm" /></div>
-                 <div className="space-y-1"><label className="text-[9px] font-black text-slate-400 uppercase tracking-widest px-1">যোগদানের তারিখ</label><input value={s.joiningDate} onChange={e => setItem({...item, staff: item.staff?.map(st => st.id === s.id ? {...st, joiningDate: e.target.value} : st)})} className="w-full p-3 bg-white rounded-xl border border-slate-200 font-bold text-sm" /></div>
-                 <div className="space-y-1"><label className="text-[9px] font-black text-slate-400 uppercase tracking-widest px-1">ছবি URL</label><input value={s.image} onChange={e => setItem({...item, staff: item.staff?.map(st => st.id === s.id ? {...st, image: e.target.value} : st)})} className="w-full p-3 bg-white rounded-xl border border-slate-200 font-bold text-sm" /></div>
-                 <div className="col-span-full space-y-1"><label className="text-[9px] font-black text-slate-400 uppercase tracking-widest px-1">শিক্ষাগত যোগ্যতা</label><input value={s.educationalQualification} onChange={e => setItem({...item, staff: item.staff?.map(st => st.id === s.id ? {...st, educationalQualification: e.target.value} : st)})} className="w-full p-3 bg-white rounded-xl border border-slate-200 font-bold text-sm" /></div>
-                 <div className="space-y-1"><label className="text-[9px] font-black text-slate-400 uppercase tracking-widest px-1">মোবাইল</label><input value={s.phone} onChange={e => setItem({...item, staff: item.staff?.map(st => st.id === s.id ? {...st, phone: e.target.value} : st)})} className="w-full p-3 bg-white rounded-xl border border-slate-200 font-bold text-sm" /></div>
-                 <div className="space-y-1"><label className="text-[9px] font-black text-slate-400 uppercase tracking-widest px-1">ফেসবুক লিংক</label><input value={s.facebook} onChange={e => setItem({...item, staff: item.staff?.map(st => st.id === s.id ? {...st, facebook: e.target.value} : st)})} className="w-full p-3 bg-white rounded-xl border border-slate-200 font-bold text-sm" /></div>
+               <div key={s.id} className="p-8 bg-slate-50 rounded-[3rem] border border-slate-200 relative grid grid-cols-1 sm:grid-cols-2 gap-6 group hover:bg-white hover:shadow-2xl transition-all duration-500">
+                 <button onClick={() => setItem({...item, staff: item.staff?.filter(st => st.id !== s.id)})} className="absolute -top-3 -right-3 w-10 h-10 bg-rose-600 text-white rounded-full flex items-center justify-center shadow-xl active:scale-90 z-10"><Trash2 size={18}/></button>
+                 <div className="space-y-1"><label className="text-[9px] font-black text-slate-400 uppercase tracking-widest px-1">নাম</label><input value={s.name} onChange={e => setItem({...item, staff: item.staff?.map(st => st.id === s.id ? {...st, name: e.target.value} : st)})} className="w-full p-4 bg-white rounded-2xl border border-slate-200 font-bold text-sm outline-none focus:border-emerald-500" /></div>
+                 <div className="space-y-1"><label className="text-[9px] font-black text-slate-400 uppercase tracking-widest px-1">পদবী</label><input value={s.designation} onChange={e => setItem({...item, staff: item.staff?.map(st => st.id === s.id ? {...st, designation: e.target.value} : st)})} className="w-full p-4 bg-white rounded-2xl border border-slate-200 font-bold text-sm outline-none focus:border-emerald-500" /></div>
+                 <div className="space-y-1"><label className="text-[9px] font-black text-slate-400 uppercase tracking-widest px-1">যোগদানের তারিখ</label><input value={s.joiningDate} onChange={e => setItem({...item, staff: item.staff?.map(st => st.id === s.id ? {...st, joiningDate: e.target.value} : st)})} className="w-full p-4 bg-white rounded-2xl border border-slate-200 font-bold text-sm outline-none focus:border-emerald-500" /></div>
+                 <div className="space-y-1"><label className="text-[9px] font-black text-slate-400 uppercase tracking-widest px-1">ছবি URL</label><input value={s.image} onChange={e => setItem({...item, staff: item.staff?.map(st => st.id === s.id ? {...st, image: e.target.value} : st)})} className="w-full p-4 bg-white rounded-2xl border border-slate-200 font-bold text-sm outline-none focus:border-emerald-500" /></div>
+                 <div className="col-span-full space-y-1"><label className="text-[9px] font-black text-slate-400 uppercase tracking-widest px-1">শিক্ষাগত যোগ্যতা</label><input value={s.educationalQualification} onChange={e => setItem({...item, staff: item.staff?.map(st => st.id === s.id ? {...st, educationalQualification: e.target.value} : st)})} className="w-full p-4 bg-white rounded-2xl border border-slate-200 font-bold text-sm outline-none focus:border-emerald-500" /></div>
+                 <div className="space-y-1"><label className="text-[9px] font-black text-slate-400 uppercase tracking-widest px-1">মোবাইল</label><input value={s.phone} onChange={e => setItem({...item, staff: item.staff?.map(st => st.id === s.id ? {...st, phone: e.target.value} : st)})} className="w-full p-4 bg-white rounded-2xl border border-slate-200 font-bold text-sm outline-none focus:border-emerald-500" /></div>
+                 <div className="space-y-1"><label className="text-[9px] font-black text-slate-400 uppercase tracking-widest px-1">ফেসবুক লিংক</label><input value={s.facebook} onChange={e => setItem({...item, staff: item.staff?.map(st => st.id === s.id ? {...st, facebook: e.target.value} : st)})} className="w-full p-4 bg-white rounded-2xl border border-slate-200 font-bold text-sm outline-none focus:border-emerald-500" /></div>
                </div>
              ))}
            </div>
         </div>
 
-        <button onClick={save} className="w-full py-6 bg-emerald-600 text-white rounded-[2rem] font-black text-xl shadow-2xl shadow-emerald-200 hover:bg-emerald-700 active:scale-95 transition-all flex items-center justify-center gap-4"><Save size={28}/> সংরক্ষণ করুন</button>
+        <button 
+          onClick={save} 
+          className="w-full py-7 bg-emerald-600 text-white rounded-[2.5rem] font-black text-xl shadow-2xl shadow-emerald-500/30 hover:bg-emerald-700 active:scale-[0.98] transition-all flex items-center justify-center gap-4"
+        >
+           <Save size={32}/> তথ্যটি সংরক্ষণ করুন
+        </button>
       </div>
     </div>
   );
