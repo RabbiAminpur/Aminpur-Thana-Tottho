@@ -8,7 +8,7 @@ import {
   LayoutDashboard, GraduationCap, Hospital, Stethoscope, 
   Shield, Building, Briefcase, Camera, Share2, Mic, 
   Flame, ShoppingCart, PlusCircle, Landmark, Package,
-  Building2, Globe2, HeartPulse, HardHat
+  Building2, Globe2, HeartPulse, HardHat, Share
 } from 'lucide-react';
 import { CATEGORIES, INFO_ITEMS, ARTICLES } from './data';
 import { CategoryId, InformationItem, Article } from './types';
@@ -37,6 +37,86 @@ const DynamicIcon = ({ name, className }: { name: string, className?: string }) 
   return (
     <div className={className}>
       {IconMap[name] || <PlusCircle size={24} />}
+    </div>
+  );
+};
+
+// Share Modal with Photocard Component
+const ShareModal: React.FC<{ isOpen: boolean; onClose: () => void; article: Article }> = ({ isOpen, onClose, article }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
+      <div className="bg-white rounded-[2.5rem] w-full max-w-sm overflow-hidden shadow-2xl relative">
+        <button 
+          onClick={onClose} 
+          className="absolute top-4 right-4 z-20 p-2 bg-black/20 hover:bg-black/40 text-white rounded-full backdrop-blur-md transition-all"
+        >
+          <X size={20} />
+        </button>
+
+        {/* Photocard Start */}
+        <div id="photocard-content" className="bg-white">
+          <div className="relative aspect-[4/5] overflow-hidden">
+            <img src={article.image} alt={article.title} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+            
+            <div className="absolute top-6 left-6 flex items-center gap-2">
+              <div className="bg-emerald-600 p-1.5 rounded-lg shadow-lg">
+                <Shield className="text-white w-4 h-4" />
+              </div>
+              <span className="text-white font-bold text-xs tracking-widest uppercase bg-black/20 backdrop-blur-sm px-2 py-1 rounded-md">আমিনপুর থানা পোর্টাল</span>
+            </div>
+
+            <div className="absolute bottom-0 left-0 right-0 p-8">
+              <div className="flex items-center gap-2 text-emerald-400 text-[10px] font-black uppercase tracking-[0.2em] mb-3">
+                <Calendar size={12} />
+                <span>{article.date}</span>
+              </div>
+              <h2 className="text-2xl font-black text-white leading-tight mb-4 drop-shadow-lg">
+                {article.title}
+              </h2>
+              <div className="w-12 h-1 bg-emerald-500 rounded-full"></div>
+            </div>
+          </div>
+          
+          <div className="bg-slate-900 p-4 text-center">
+            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.3em]">www.aminpurthana.gov.bd</p>
+          </div>
+        </div>
+        {/* Photocard End */}
+
+        <div className="p-6 bg-white space-y-4">
+          <p className="text-center text-xs text-slate-500 font-medium">উপরে থাকা ফটোকার্ডটি সোশ্যাল মিডিয়ায় শেয়ার করার জন্য স্ক্রিনশট নিন অথবা নিচের বাটনে ক্লিক করুন।</p>
+          <div className="flex gap-3">
+            <button 
+              onClick={() => {
+                if (navigator.share) {
+                  navigator.share({
+                    title: article.title,
+                    text: article.excerpt,
+                    url: window.location.href,
+                  });
+                } else {
+                  navigator.clipboard.writeText(window.location.href);
+                  alert('লিংক কপি করা হয়েছে!');
+                }
+              }}
+              className="flex-1 flex items-center justify-center gap-2 py-4 bg-emerald-600 text-white rounded-2xl font-bold shadow-lg shadow-emerald-200 active:scale-95 transition-all"
+            >
+              <Share2 size={18} />
+              লিংক শেয়ার
+            </button>
+            <button 
+              onClick={() => alert('ফটোকার্ডটি সেভ করতে স্ক্রিনশট নিন অথবা ইমেজটি চেপে ধরুন।')}
+              className="flex-1 flex items-center justify-center gap-2 py-4 bg-slate-100 text-slate-700 rounded-2xl font-bold active:scale-95 transition-all"
+            >
+              <Camera size={18} />
+              ইমেজ সেভ
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
@@ -327,17 +407,33 @@ const Dashboard: React.FC = () => {
 const ArticleDetailView: React.FC = () => {
   const { articleId } = useParams<{ articleId: string }>();
   const navigate = useNavigate();
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const article = ARTICLES.find(a => a.id === articleId);
 
   if (!article) return <div>Article not found</div>;
 
   return (
     <div className="space-y-6 animate-fadeIn pb-10">
-      <div className="flex items-center gap-3">
-        <button onClick={() => navigate(-1)} className="p-3 bg-white text-gray-700 rounded-2xl shadow-sm border border-slate-100 hover:bg-gray-50 transition-all">
-          <ChevronLeft size={24} />
+      <ShareModal 
+        isOpen={isShareModalOpen} 
+        onClose={() => setIsShareModalOpen(false)} 
+        article={article} 
+      />
+      
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <button onClick={() => navigate(-1)} className="p-3 bg-white text-gray-700 rounded-2xl shadow-sm border border-slate-100 hover:bg-gray-50 transition-all">
+            <ChevronLeft size={24} />
+          </button>
+          <h1 className="text-lg font-bold text-slate-800 truncate">আর্টিকেল বিস্তারিত</h1>
+        </div>
+        <button 
+          onClick={() => setIsShareModalOpen(true)}
+          className="flex items-center gap-2 px-5 py-3 bg-emerald-600 text-white rounded-2xl font-bold shadow-lg shadow-emerald-200 hover:bg-emerald-700 active:scale-95 transition-all"
+        >
+          <Share2 size={18} />
+          <span>শেয়ার</span>
         </button>
-        <h1 className="text-lg font-bold text-slate-800 truncate">আর্টিকেল বিস্তারিত</h1>
       </div>
 
       <div className="bg-white rounded-[2rem] shadow-sm overflow-hidden border border-slate-100">
@@ -362,7 +458,7 @@ const ArticleDetailView: React.FC = () => {
              </div>
           </div>
           <article className="prose prose-slate max-w-none">
-             <p className="text-slate-600 text-lg leading-relaxed whitespace-pre-line">
+             <p className="text-slate-600 text-lg leading-relaxed whitespace-pre-line font-medium">
                 {article.content}
              </p>
           </article>
