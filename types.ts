@@ -17,19 +17,13 @@ export enum CategoryId {
   OTHERS = 'others'
 }
 
-export interface Teacher {
+export interface StaffProfile {
+  id: string;
   name: string;
   designation: string;
   image: string;
   phone?: string;
-}
-
-export interface Doctor {
-  name: string;
-  specialty: string;
-  image: string;
-  phone: string;
-  chamber?: string;
+  bio?: string;
 }
 
 export interface TableRow {
@@ -48,17 +42,16 @@ export interface InformationItem {
   categoryId: CategoryId;
   name: string;
   image: string;
-  gallery?: string[];
+  gallery: string[];
   description: string;
   location: string;
   phone: string;
   estYear?: string;
   eiin?: string;
-  teachers?: Teacher[];
-  doctors?: Doctor[];
+  staff: StaffProfile[];
   chairman?: string;
   fullDetails?: string;
-  tables?: DynamicTable[];
+  tables: DynamicTable[];
 }
 
 export interface Article {
