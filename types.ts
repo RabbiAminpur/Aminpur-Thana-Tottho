@@ -11,6 +11,7 @@ export enum CategoryId {
   MEDIA = 'media',
   FIRE_SERVICE = 'fire_service',
   MARKET = 'market',
+  NEWS = 'news',
   OTHERS = 'others'
 }
 
@@ -47,6 +48,16 @@ export interface InformationItem {
   chairman?: string;
   // Generic details
   fullDetails?: string;
+}
+
+export interface Article {
+  id: string;
+  title: string;
+  image: string;
+  date: string;
+  excerpt: string;
+  content: string;
+  author: string;
 }
 
 export interface Category {
