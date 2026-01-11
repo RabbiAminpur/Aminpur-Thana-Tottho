@@ -42,7 +42,7 @@ const getStorage = <T,>(key: string, initial: T): T => {
   return data ? JSON.parse(data) : initial;
 };
 
-// --- NEW INFO PAGES ---
+// --- INFO PAGES ---
 
 const AboutUs: React.FC = () => (
   <div className="space-y-6 animate-fadeIn">
@@ -156,20 +156,6 @@ const Dashboard: React.FC = () => {
           />
         </div>
       </section>
-
-      {isSearching && (
-        <section className="space-y-4">
-          <h2 className="text-lg font-bold px-1 text-slate-800">সার্চ রেজাল্ট ({filteredItems.length})</h2>
-          <div className="grid gap-3">
-            {filteredItems.map(item => (
-              <Link key={item.id} to={`/detail/${item.id}`} className="flex bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 p-2 hover:border-emerald-200 transition-all">
-                <img src={item.image} className="w-16 h-16 rounded-xl object-cover" />
-                <div className="p-3 flex flex-col justify-center"><h3 className="font-bold text-sm text-slate-800">{item.name}</h3><p className="text-[10px] text-slate-400 mt-0.5">{item.location}</p></div>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
 
       {!isSearching && (
         <>
@@ -380,6 +366,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 // --- ADMIN VIEWS ---
 
 const AdminLogin: React.FC = () => {
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -387,13 +374,14 @@ const AdminLogin: React.FC = () => {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    // Simple mock logic
+    
+    // Credentials logic
     setTimeout(() => {
-      if (password === 'admin123') {
+      if (username === 'mirrabbihossain' && password === 'Rabbi@198027') {
         localStorage.setItem('isAdmin', 'true');
         navigate('/admin/dashboard');
       } else {
-        alert('ভুল পাসওয়ার্ড!');
+        alert('ভুল ইউজারনেম অথবা পাসওয়ার্ড!');
       }
       setIsLoading(false);
     }, 800);
@@ -411,12 +399,23 @@ const AdminLogin: React.FC = () => {
             <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest mt-2 leading-none">শুধুমাত্র অনুমোদিত এক্সেস</p>
           </div>
 
-          <form onSubmit={handleLogin} className="space-y-6">
-            <div className="space-y-2">
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div className="space-y-1.5">
+              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">ইউজারনেম</label>
+              <input 
+                type="text" 
+                placeholder="ইউজারনেম" 
+                className="w-full px-6 py-4 rounded-2xl border border-slate-100 bg-slate-50 focus:bg-white focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all text-sm font-bold"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </div>
+            <div className="space-y-1.5">
               <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">পাসওয়ার্ড</label>
               <input 
                 type="password" 
-                placeholder="পাসওয়ার্ড প্রবেশ করুন" 
+                placeholder="পাসওয়ার্ড" 
                 className="w-full px-6 py-4 rounded-2xl border border-slate-100 bg-slate-50 focus:bg-white focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all text-sm font-bold"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -426,7 +425,7 @@ const AdminLogin: React.FC = () => {
             <button 
               type="submit" 
               disabled={isLoading}
-              className={`w-full bg-emerald-600 text-white py-4 rounded-2xl font-bold transition-all shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-2 ${isLoading ? 'opacity-70 cursor-wait' : 'hover:bg-emerald-700 active:scale-[0.98]'}`}
+              className={`w-full bg-emerald-600 text-white py-4 rounded-2xl font-bold transition-all shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-2 mt-4 ${isLoading ? 'opacity-70 cursor-wait' : 'hover:bg-emerald-700 active:scale-[0.98]'}`}
             >
               {isLoading ? 'প্রবেশ করা হচ্ছে...' : 'লগইন করুন'}
               {!isLoading && <ArrowRight size={18} />}
