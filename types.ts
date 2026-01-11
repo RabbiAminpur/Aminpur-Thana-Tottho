@@ -11,6 +11,8 @@ export enum CategoryId {
   MEDIA = 'media',
   FIRE_SERVICE = 'fire_service',
   MARKET = 'market',
+  COURIER = 'courier',
+  TRANSPORT = 'transport',
   NEWS = 'news',
   OTHERS = 'others'
 }
@@ -38,15 +40,11 @@ export interface InformationItem {
   description: string;
   location: string;
   phone: string;
-  // Specific to Education
   estYear?: string;
   eiin?: string;
   teachers?: Teacher[];
-  // Specific to Hospital
   doctors?: Doctor[];
-  // Specific to Union
   chairman?: string;
-  // Generic details
   fullDetails?: string;
 }
 
