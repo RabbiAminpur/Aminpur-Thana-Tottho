@@ -14,6 +14,11 @@ export enum CategoryId {
   OTHERS = 'others'
 }
 
+export interface SubCategory {
+  id: string;
+  title: string;
+}
+
 export interface CustomField {
   label: string;
   value: string;
@@ -35,11 +40,15 @@ export interface StaffProfile {
   facebook?: string;
   website?: string;
   bio?: string;
+  educationalQualification?: string;
+  experience?: string;
+  address?: string;
 }
 
 export interface InformationItem {
   id: string;
   categoryId: CategoryId;
+  subCategoryId?: string;
   name: string;
   image: string;
   description: string;
@@ -47,6 +56,7 @@ export interface InformationItem {
   phone: string;
   infoSections: InfoSection[];
   staff: StaffProfile[];
+  establishmentYear?: string;
 }
 
 export interface Article {
@@ -64,4 +74,5 @@ export interface Category {
   title: string;
   icon: string;
   color: string;
+  subCategories?: SubCategory[];
 }
