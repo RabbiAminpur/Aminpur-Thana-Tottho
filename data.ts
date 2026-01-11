@@ -152,7 +152,21 @@ export const INFO_ITEMS: InformationItem[] = [
     ]
   }
 ];
-
+  {
+    "id": "union-1",
+    "categoryId": "union",
+    "name": "জাতসাখিনী ইউনিয়ন পরিষদ",
+    "image": "https://i.ibb.co/B50z5vPH/unnamed.webp",
+    "description": "আমিনপুর থানার ১নং ইউনিয়ন পরিষদ। এটি একটি ঐতিহ্যবাহী প্রশাসনিক এলাকা।",
+    "location": "জাতপুর বাজার, আমিনপুর, পাবনা।",
+    "phone": "০১৭০০-১১১২২২",
+    "chairman": "মোঃ নজরুল ইসলাম",
+    "fullDetails": "জাতপুর ইউনিয়ন আমিনপুর থানার একটি অত্যন্ত গুরুত্বপূর্ণ ইউনিয়ন। যমুনা নদীর কোল ঘেঁষে গড়ে ওঠা এই ইউনিয়নের অধিকাংশ মানুষ কৃষি এবং ব্যবসার সাথে জড়িত।",
+    "gallery": [
+      "https://images.unsplash.com/photo-1590060153074-303de9911bd7?q=80&w=800",
+      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=800"
+    ]
+  }
 export const ARTICLES: Article[] = [];
 export const INFO_ITEMS: InformationItem[] = [
   {
