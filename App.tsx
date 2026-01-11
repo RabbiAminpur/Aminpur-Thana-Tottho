@@ -126,7 +126,7 @@ const ExitModal: React.FC<{ isOpen: boolean; onClose: () => void; onConfirm: () 
   if (!isOpen) return null;
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
-      <div className="bg-white rounded-[2.5rem] w-full max-w-sm overflow-hidden shadow-2xl border border-white/20">
+      <div className="bg-white rounded-[2.5rem] w-full max-sm overflow-hidden shadow-2xl border border-white/20">
         <div className="p-8 text-center">
           <div className="w-20 h-20 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
             <LogOut size={40} />
